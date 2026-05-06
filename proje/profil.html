@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil — Kampüs Çözüm Merkezi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/profil.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="hamburger">☰</button>
+      <span class="header-title">Kampüs Çözüm Merkezi</span>
+    </div>
+    <div class="header-user">
+      <div class="avatar">AU</div>
+      Student Yarısı ▾
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-logo">
+      <div class="logo-sm">FÜ</div>
+      <span>Kampüs Çözüm<br/>Merkezi</span>
+    </div>
+    <nav>
+      <a href="basvurularim.html">
+        <span class="icon">📋</span> Başvurularım
+      </a>
+      <a href="yeni_basvuru.html">
+        <span class="icon">✏️</span> Yeni Başvuru
+      </a>
+      <a href="profil.html" class="active">
+        <span class="icon">👤</span> Profil
+      </a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div class="page-title">PROFİL</div>
+
+    <div class="profile-header">
+      <div class="profile-avatar">AU</div>
+      <div class="profile-info">
+        <h2>Ahmet Uzun</h2>
+        <p>ahmet.uzun@firat.edu.tr</p>
+        <span class="profile-badge">👤 Öğrenci</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Toplam Talep</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num yellow">2</div>
+        <div class="stat-label">Beklemede</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num green">3</div>
+        <div class="stat-label">Çözüldü</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Kişisel Bilgiler</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ad Soyad</label>
+          <input type="text" id="fullname" value="Ahmet Uzun" />
+        </div>
+        <div class="form-group">
+          <label>Öğrenci No</label>
+          <input type="text" value="190203001" readonly />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" id="email" value="ahmet.uzun@firat.edu.tr" />
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="text" id="phone" value="+90 555 123 45 67" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fakülte</label>
+          <select>
+            <option selected>Mühendislik Fakültesi</option>
+            <option>Fen Edebiyat</option>
+            <option>İktisadi İdari Bilimler</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Bölüm</label>
+          <select>
+            <option selected>Bilgisayar Mühendisliği</option>
+            <option>Elektrik-Elektronik</option>
+            <option>Makine</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-save" onclick="saveProfile()">💾 Bilgileri Güncelle</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Şifre Değiştir</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Mevcut Şifre</label>
+          <input type="password" placeholder="••••••••" />
+        </div>
+        <div class="form-group">
+          <label>Yeni Şifre</label>
+          <input type="password" id="newPass" placeholder="••••••••" />
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1.2rem;max-width:350px;">
+        <label>Yeni Şifre (Tekrar)</label>
+        <input type="password" id="newPass2" placeholder="••••••••" />
+      </div>
+      <button class="btn-save" onclick="changePass()">🔒 Şifreyi Güncelle</button>
+    </div>
+
+    <div class="card danger-zone">
+      <div class="danger-zone-text">
+        <div class="title">Hesabı Sil</div>
+        <div class="desc">Bu işlem geri alınamaz. Tüm verileriniz silinecektir.</div>
+      </div>
+      <button class="btn-danger" onclick="deleteAccount()">🗑️ Hesabı Sil</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/profil.js"></script>
+</body>
+</html>

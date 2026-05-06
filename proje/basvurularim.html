@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Başvurularım — Kampüs Çözüm Merkezi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/basvurularim.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="hamburger">☰</button>
+      <span class="header-title">Kampüs Çözüm Merkezi</span>
+    </div>
+    <div class="header-user">
+      <div class="avatar">AU</div>
+      Student Yarısı ▾
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-logo">
+      <div class="logo-sm">FÜ</div>
+      <span>Kampüs Çözüm<br/>Merkezi</span>
+    </div>
+    <nav>
+      <a href="basvurularim.html" class="active">
+        <span class="icon">📋</span> Başvurularım
+      </a>
+      <a href="yeni_basvuru.html">
+        <span class="icon">✏️</span> Yeni Başvuru
+      </a>
+      <a href="profil.html">
+        <span class="icon">👤</span> Profil
+      </a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div class="page-title">BAŞVURULARİM</div>
+
+    <div class="filters">
+      <button class="chip active" onclick="filterTickets('tumu', this)">Tümü</button>
+      <button class="chip" onclick="filterTickets('beklemede', this)">Beklemede</button>
+      <button class="chip" onclick="filterTickets('islemde', this)">İşlemde</button>
+      <button class="chip" onclick="filterTickets('cozuldu', this)">Çözüldü</button>
+      <button class="chip" onclick="filterTickets('kapali', this)">Kapalı</button>
+    </div>
+
+    <div class="ticket-list">
+
+      <div class="ticket-card beklemede" data-status="beklemede">
+        <div class="ticket-info">
+          <div class="ticket-top">
+            <span class="ticket-id">#127</span>
+            <span class="badge badge-yellow">⏳ Beklemede</span>
+          </div>
+          <div class="ticket-title">Mühendislik Fakültesi - Ders Kaydı Sorunu</div>
+          <div class="ticket-meta">Mühendislik Fakültesi · 20.04.2025</div>
+        </div>
+        <button class="btn-detail" onclick="openModal(127,'Mühendislik Fakültesi - Ders Kaydı Sorunu','Beklemede','Mühendislik Fakültesi','20.04.2025')">Detay</button>
+      </div>
+
+      <div class="ticket-card islemde" data-status="islemde">
+        <div class="ticket-info">
+          <div class="ticket-top">
+            <span class="ticket-id">#128</span>
+            <span class="badge badge-blue">🔵 İşlemde</span>
+          </div>
+          <div class="ticket-title">Yemekhane - Kart Bakiyesi Yüklenmiyor</div>
+          <div class="ticket-meta">Yemekhane · 18.04.2025</div>
+        </div>
+        <button class="btn-detail" onclick="openModal(128,'Yemekhane - Kart Bakiyesi Yüklenmiyor','İşlemde','Yemekhane','18.04.2025')">Detay</button>
+      </div>
+
+      <div class="ticket-card cozuldu" data-status="cozuldu">
+        <div class="ticket-info">
+          <div class="ticket-top">
+            <span class="ticket-id">#129</span>
+            <span class="badge badge-green">✅ Çözüldü</span>
+          </div>
+          <div class="ticket-title">Bilgi İşlem - Öğrenci E-posta Erişimi</div>
+          <div class="ticket-meta">Bilgi İşlem · 15.04.2025</div>
+        </div>
+        <button class="btn-detail" onclick="openModal(129,'Bilgi İşlem - Öğrenci E-posta Erişimi','Çözüldü','Bilgi İşlem','15.04.2025')">Detay</button>
+      </div>
+
+      <div class="ticket-card beklemede" data-status="beklemede">
+        <div class="ticket-info">
+          <div class="ticket-top">
+            <span class="ticket-id">#130</span>
+            <span class="badge badge-yellow">⏳ Beklemede</span>
+          </div>
+          <div class="ticket-title">Öğrenci İşleri - Transkript Talebi</div>
+          <div class="ticket-meta">Öğrenci İşleri · 12.04.2025</div>
+        </div>
+        <button class="btn-detail" onclick="openModal(130,'Öğrenci İşleri - Transkript Talebi','Beklemede','Öğrenci İşleri','12.04.2025')">Detay</button>
+      </div>
+
+      <div class="ticket-card kapali" data-status="kapali">
+        <div class="ticket-info">
+          <div class="ticket-top">
+            <span class="ticket-id">#126</span>
+            <span class="badge badge-gray">⚫ Kapalı</span>
+          </div>
+          <div class="ticket-title">Kütüphane - Kitap Uzatma</div>
+          <div class="ticket-meta">Kütüphane · 05.04.2025</div>
+        </div>
+        <button class="btn-detail" onclick="openModal(126,'Kütüphane - Kitap Uzatma','Kapalı','Kütüphane','05.04.2025')">Detay</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Talep Detayı</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="detail-row"><span class="detail-label">Ticket ID:</span><span id="mId"></span></div>
+    <div class="detail-row"><span class="detail-label">Durum:</span><span id="mStatus"></span></div>
+    <div class="detail-row"><span class="detail-label">Kategori:</span><span id="mCat"></span></div>
+    <div class="detail-row"><span class="detail-label">Tarih:</span><span id="mDate"></span></div>
+    <div class="chat-box" id="chatMessages">
+      <div class="msg msg-support">
+        <div class="msg-bubble">Merhaba! Talebinizi aldık, en kısa sürede size dönüş yapacağız.</div>
+        <div class="msg-meta">Destek Ekibi · 09:30</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." />
+      <button onclick="sendMsg()">Gönder</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/basvurularim.js"></script>
+</body>
+</html>

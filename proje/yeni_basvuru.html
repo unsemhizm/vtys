@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yeni Başvuru — Kampüs Çözüm Merkezi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/yeni_basvuru.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="hamburger">☰</button>
+      <span class="header-title">Kampüs Çözüm Merkezi</span>
+    </div>
+    <div class="header-right">
+      <div class="header-user">
+        <div class="avatar">AU</div>
+        Student Yarısı ▾
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-logo">
+      <div class="logo-sm">FÜ</div>
+      <span>Kampüs Çözüm<br/>Merkezi</span>
+    </div>
+    <nav>
+      <a href="basvurularim.html">
+        <span class="icon">📋</span> Başvurularım
+      </a>
+      <a href="yeni_basvuru.html" class="active">
+        <span class="icon">✏️</span> Yeni Başvuru
+      </a>
+      <a href="profil.html">
+        <span class="icon">👤</span> Profil
+      </a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div class="page-title">YENİ BAŞVURU</div>
+
+    <div class="card">
+      <form id="basvuruForm">
+        <div class="form-group full" style="margin-bottom:1.2rem;">
+          <label>Title <span class="small-label">Varchar</span></label>
+          <input type="text" id="title" placeholder="Talebinizin başlığını yazın..." required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="category" required>
+              <option value="">Seçiniz</option>
+              <option>Mühendislik Fakültesi</option>
+              <option>Öğrenci İşleri</option>
+              <option>Yemekhane</option>
+              <option>Bilgi İşlem</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <select id="department" required>
+              <option value="">Seçiniz</option>
+              <option>Bilgisayar Mühendisliği</option>
+              <option>Elektrik-Elektronik</option>
+              <option>Öğrenci İşleri</option>
+              <option>Yurt Müdürlüğü</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group full" style="margin-bottom:1.2rem;">
+          <label>Description</label>
+          <textarea id="description" placeholder="Sorununuzu detaylı açıklayın..." required></textarea>
+        </div>
+        <div class="form-group full" style="margin-bottom:1.5rem;">
+          <label for="fileInput">
+            <span class="file-btn">📎 Ek Dosya Yükle</span>
+          </label>
+          <input type="file" id="fileInput" />
+          <span id="fileName" style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;"></span>
+        </div>
+        <button type="submit" class="submit-btn">BAŞVURUYU GÖNDER</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="table-title">TALEPLERİM</div>
+      <table id="ticketTable">
+        <thead>
+          <tr>
+            <th>TicketID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ticketBody">
+          <tr>
+            <td>127</td>
+            <td>Mühendislik Fakültesi</td>
+            <td>Bilet</td>
+            <td><span class="badge badge-open">Açık</span></td>
+            <td><a href="basvurularim.html" class="btn-sm">Detay</a></td>
+          </tr>
+          <tr>
+            <td>128</td>
+            <td>Yemekhane Sorunu</td>
+            <td>Yemekhane</td>
+            <td><span class="badge badge-open">Açık</span></td>
+            <td><a href="basvurularim.html" class="btn-sm">Detay</a></td>
+          </tr>
+          <tr>
+            <td>129</td>
+            <td>E-posta Erişimi</td>
+            <td>Bilgi İşlem</td>
+            <td><span class="badge badge-done">Çözüldü</span></td>
+            <td><a href="basvurularim.html" class="btn-sm">Detay</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/yeni_basvuru.js"></script>
+</body>
+</html>

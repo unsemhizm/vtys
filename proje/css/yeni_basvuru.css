@@ -1,0 +1,68 @@
+/* =============================================
+   YENİ BAŞVURU — yeni_basvuru.css
+   ============================================= */
+
+.small-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.file-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.3rem;
+}
+
+.file-btn:hover {
+  background: var(--primary-light);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.submit-btn {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 2.2rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  background: var(--primary-light);
+}
+
+.table-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .submit-btn {
+    width: 100%;
+  }
+}
