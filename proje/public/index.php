@@ -301,9 +301,9 @@
       pass = document.getElementById('studentPass').value.trim();
       
       if (email === "ahmet.uzun@firat.edu.tr" && pass === "123456") {
-        window.location.href = "ogrenci_anasayfa.html";
+        window.location.href = "../app/views/ogrenci_anasayfa.html";
       } else if (pass.length >= 4) {
-        window.location.href = "ogrenci_anasayfa.html";
+        window.location.href = "../app/views/ogrenci_anasayfa.html";
       } else {
         showError("Şifre en az 4 karakter olmalıdır!");
       }
@@ -312,9 +312,9 @@
       pass = document.getElementById('staffPass').value.trim();
 
       if (email === "hakan.demir@firat.edu.tr" && pass === "123456") {
-        window.location.href = "personel_paneli.html";
+        window.location.href = "../app/views/personel_paneli.html";
       } else if (pass.length >= 4) {
-        window.location.href = "personel_paneli.html";
+        window.location.href = "../app/views/personel_paneli.html";
       } else {
         showError("Şifre en az 4 karakter olmalıdır!");
       }
@@ -323,9 +323,9 @@
       pass = document.getElementById('adminPass').value.trim();
 
       if (email === "admin@firat.edu.tr" && pass === "123456") {
-        window.location.href = "admin_paneli.html";
+        window.location.href = "admin.php";
       } else if (pass.length >= 4) {
-        window.location.href = "admin_paneli.html";
+        window.location.href = "admin.php";
       } else {
         showError("Yönetici şifresi en az 4 karakter olmalıdır!");
       }
