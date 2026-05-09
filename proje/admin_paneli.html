@@ -18,25 +18,25 @@
       </div>
     </div>
     <div class="header-right">
-      <span class="header-user-name">Admin Dashboard</span>
-      <div class="header-avatar">👤</div>
+      <span class="header-user-name">Sistem Yöneticisi Ahmet</span>
+      <div class="header-avatar" style="background:var(--admin-accent);">SA</div>
     </div>
   </header>
 
   <!-- Sidebar -->
   <aside class="admin-sidebar">
     <nav class="sidebar-nav">
-      <a href="#" class="nav-item active">
+      <a href="#sec-istatistik" class="nav-item">
         <span>📊</span> İstatistikler
       </a>
-      <a href="#" class="nav-item">
+      <a href="#sec-kullanici" class="nav-item">
         <span>👤</span> Kullanıcı Yönetimi
       </a>
-      <a href="#" class="nav-item">
+      <a href="#sec-departman" class="nav-item">
         <span>🏢</span> Departmanlar
       </a>
-      <a href="#" class="nav-item">
-        <span>💬</span> Mesajlar
+      <a href="#sec-mesajlar" class="nav-item">
+        <span>💬</span> Tüm Başvurular
       </a>
     </nav>
   </aside>
@@ -44,87 +44,228 @@
   <!-- Main Content -->
   <main class="admin-main">
     
-    <h2 class="section-title">GENEL İSTATİSTİKLER</h2>
-    
-    <div class="stats-grid">
-      <div class="stat-card">
-        <h3>TOPLAM BİLET (3450)</h3>
-        <div class="stat-chart-placeholder" style="font-size: 1rem; color: #a0aec0;">
-          <!-- Placeholder for Bar Chart -->
-          [Bar Chart]
+    <!-- SECTION 1: İstatistikler -->
+    <section id="sec-istatistik" class="admin-section" style="margin-bottom: 3rem;">
+      <h2 class="section-title">GENEL İSTATİSTİKLER</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>TOPLAM BİLET (3)</h3>
+          <div class="stat-chart-placeholder" style="font-size: 1rem; color: #a0aec0;">
+            <!-- Placeholder for Bar Chart -->
+            [Bar Chart]
+          </div>
+        </div>
+        <div class="stat-card">
+          <h3>ÇÖZÜLME ORANI (%33)</h3>
+          <div class="stat-chart-placeholder">
+            %33
+          </div>
+        </div>
+        <div class="stat-card">
+          <h3>EN ÇOK BİLET AÇILAN KATEGORİ<br><span style="font-size: 0.8rem; text-transform: none;">(Altyapı ve İnternet Sorunları)</span></h3>
+          <div class="stat-chart-placeholder" style="font-size: 1rem; color: #a0aec0;">
+            <!-- Placeholder for Bar Chart -->
+            [Bar Chart]
+          </div>
         </div>
       </div>
-      <div class="stat-card">
-        <h3>ÇÖZÜLME ORANI (%92)</h3>
-        <div class="stat-chart-placeholder">
-          %92
-        </div>
-      </div>
-      <div class="stat-card">
-        <h3>EN ÇOK BİLET AÇILAN KATEGORİ<br><span style="font-size: 0.8rem; text-transform: none;">(Yemekhane)</span></h3>
-        <div class="stat-chart-placeholder" style="font-size: 1rem; color: #a0aec0;">
-          <!-- Placeholder for Bar Chart -->
-          [Bar Chart]
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="table-header-row">
-      <h2 class="section-title" style="margin: 0;">KULLANICI YÖNETİMİ</h2>
-      <button class="btn-primary">Yeni Kullanıcı Ekle</button>
-    </div>
+    <!-- SECTION 2: Kullanıcı Yönetimi -->
+    <section id="sec-kullanici" class="admin-section" style="margin-bottom: 3rem;">
+      <div class="table-header-row">
+        <h2 class="section-title" style="margin: 0;">KULLANICI YÖNETİMİ</h2>
+        <button class="btn-primary">Yeni Kullanıcı Ekle</button>
+      </div>
+      <div class="admin-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ad Soyad</th>
+              <th>E-posta</th>
+              <th>Rol</th>
+              <th>Birim</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Sistem Yöneticisi Ahmet</td>
+              <td>admin@kampus.edu.tr</td>
+              <td><span class="badge" style="background:#122a52;color:white;padding:2px 6px;border-radius:4px;font-size:0.8rem;">Admin</span></td>
+              <td>-</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Mühendislik Sekreteri Elif</td>
+              <td>eng.sekreter@kampus.edu.tr</td>
+              <td><span class="badge" style="background:#e2a836;color:white;padding:2px 6px;border-radius:4px;font-size:0.8rem;">Personel</span></td>
+              <td>Mühendislik Fakültesi Dekanlığı</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Öğrenci İşleri Görevlisi Can</td>
+              <td>ogris.gorevli@kampus.edu.tr</td>
+              <td><span class="badge" style="background:#e2a836;color:white;padding:2px 6px;border-radius:4px;font-size:0.8rem;">Personel</span></td>
+              <td>Öğrenci İşleri Daire Bşk.</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Yusuf Canlı</td>
+              <td>yusuf.can@ogrenci.kampus.edu.tr</td>
+              <td><span class="badge" style="background:#2ecc71;color:white;padding:2px 6px;border-radius:4px;font-size:0.8rem;">Öğrenci</span></td>
+              <td>-</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <div class="admin-card">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>UserID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Department</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Karan</td>
-            <td>andenz@gmail.com</td>
-            <td>Açık</td>
-            <td>Yemekhane</td>
-            <td>
-              <button class="btn-action btn-edit">Düzenle</button>
-              <button class="btn-action btn-delete">Sil</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Firast</td>
-            <td>namis@gmail.com</td>
-            <td>Dersent</td>
-            <td>Çözülde</td>
-            <td>
-              <button class="btn-action btn-edit">Düzenle</button>
-              <button class="btn-action btn-delete">Sil</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Belsen</td>
-            <td>namis@gmail.com</td>
-            <td>Çözüldü</td>
-            <td>Bilgi İşlem</td>
-            <td>
-              <button class="btn-action btn-edit">Düzenle</button>
-              <button class="btn-action btn-delete">Sil</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- SECTION 3: Departmanlar (Birimler) -->
+    <section id="sec-departman" class="admin-section" style="margin-bottom: 3rem;">
+      <div class="table-header-row">
+        <h2 class="section-title" style="margin: 0;">BİRİMLER / DEPARTMANLAR</h2>
+        <button class="btn-primary">Yeni Birim Ekle</button>
+      </div>
+      <div class="admin-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Birim ID</th>
+              <th>Birim Adı</th>
+              <th>Konum</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Bilgi İşlem Daire Başkanlığı</td>
+              <td>Rektörlük Binası - 2. Kat</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Öğrenci İşleri Daire Başkanlığı</td>
+              <td>Rektörlük Binası - Giriş Katı</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mühendislik Fakültesi Dekanlığı</td>
+              <td>Mühendislik Blokları - A Blok Zemin Kat</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Sağlık, Kültür ve Spor Daire Bşk. (SKS)</td>
+              <td>Merkez Yemekhane Binası - 1. Kat</td>
+              <td>
+                <button class="btn-action btn-edit">Düzenle</button>
+                <button class="btn-action btn-delete">Sil</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Mesajlar (Tüm Başvurular / Yanıtlar) -->
+    <section id="sec-mesajlar" class="admin-section" style="margin-bottom: 3rem;">
+      <div class="table-header-row">
+        <h2 class="section-title" style="margin: 0;">SİSTEMDEKİ TÜM BAŞVURULAR</h2>
+      </div>
+      <div class="admin-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Başvuru ID</th>
+              <th>Kullanıcı (ID)</th>
+              <th>Başlık</th>
+              <th>Birim</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Yusuf Canlı (5)</td>
+              <td>Mühendislik Blokları Wi-Fi Kopma Sorunu</td>
+              <td>Bilgi İşlem Daire Bşk.</td>
+              <td><span style="color:#F59E0B;font-weight:700;">İnceleniyor</span></td>
+              <td>01.05.2026</td>
+              <td>
+                <button class="btn-action btn-edit">Görüntüle</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Esra Yılmaz (6)</td>
+              <td>Yatay Geçiş Muafiyet Dilekçesi Onayı</td>
+              <td>Öğrenci İşleri Daire Bşk.</td>
+              <td><span style="color:#EF4444;font-weight:700;">Açık</span></td>
+              <td>03.05.2026</td>
+              <td>
+                <button class="btn-action btn-edit">Görüntüle</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Yusuf Canlı (5)</td>
+              <td>Kütüphane Çalışma Salonu Klima Arızası</td>
+              <td>Kütüphane Daire Bşk.</td>
+              <td><span style="color:#10B981;font-weight:700;">Çözüldü</span></td>
+              <td>04.05.2026</td>
+              <td>
+                <button class="btn-action btn-edit">Görüntüle</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
   </main>
+
+  <script>
+    // Tab switching removed to display all content as a continuous dashboard layout
+    // Sidebar links now act as smooth scroll anchors
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(nav => nav.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
 
 </body>
 </html>
