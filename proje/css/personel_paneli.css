@@ -1,0 +1,73 @@
+/* =============================================
+   PERSONEL PANELİ ÖZEL STİLLERİ — personel_paneli.css
+   ============================================= */
+
+.staff-badge {
+  background: rgba(232, 160, 32, 0.15);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid var(--primary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ticket-row:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.ticket-row.beklemede { border-left-color: var(--accent); }
+.ticket-row.islemde { border-left-color: var(--primary-light); }
+.ticket-row.cozuldu { border-left-color: #2e9e5b; }
+.ticket-row.reddedildi { border-left-color: #dc3545; }
+
+.ticket-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.ticket-title-text {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+.ticket-sub-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.btn-action {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+.btn-action:hover {
+  background: var(--primary-light);
+}
+
+/* Status Selector in Modal */
+.status-select-group {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}

@@ -3,76 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kampüs Çözüm Merkezi</title>
+  <title>Fırat Üniversitesi Kampüs Çözüm Merkezi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
 
-<header>
+<!-- LANDING NAVIGATION -->
+<header class="landing-header">
   <div class="header-inner">
     <div class="header-logo">
       <div class="logo-circle">FÜ</div>
       <div>
-        <h1>Kampüs Çözüm Merkezi</h1>
+        <h1 style="color: #fff;">Kampüs Çözüm Merkezi</h1>
         <span>Fırat Üniversitesi</span>
       </div>
     </div>
     <div class="header-right">
-      <div class="header-user">
-        <div class="avatar">AU</div>
-        Ahmet Uzun ▾
-      </div>
+      <button class="btn-primary" style="padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: var(--accent);" onclick="openLoginModal()">Giriş Yap</button>
     </div>
   </div>
 </header>
 
-<div class="hero">
-  <h2>FIRAT ÜNİVERSİTESİ — KAMPÜS ÇÖZÜM MERKEZİ</h2>
-  <div class="search-bar">
-    <input type="text" placeholder="Sorununuz nedir? Aratın..." />
-    <button>🔍</button>
+<!-- HERO SECTION -->
+<section class="landing-hero">
+  <h1>Fırat Üniversitesi<br/>Kampüs Çözüm Merkezi</h1>
+  <p>Üniversitemiz bünyesindeki taleplerinizi, şikayetlerinizi ve önerilerinizi dijitalleştirerek bürokrasiyi ortadan kaldırıyoruz. Sorunlarınızı doğrudan ilgili birimlere iletin ve süreçleri anlık olarak takip edin.</p>
+  <div>
+    <button class="btn-landing-primary" onclick="openLoginModal()">Sisteme Giriş Yap</button>
+    <a href="#features" class="btn-landing-secondary">Daha Fazla Bilgi</a>
   </div>
-</div>
+</section>
 
-<main>
-  <p class="section-title">Kategoriler</p>
-  <div class="categories">
-    <a href="yeni_basvuru.html" class="cat-card">
-      <div class="cat-icon">🎓</div>
-      <h3>MÜHENDİSLİK FAKÜLTESİ</h3>
-    </a>
-    <a href="yeni_basvuru.html" class="cat-card">
-      <div class="cat-icon">👤</div>
-      <h3>ÖĞRENCİ İŞLERİ</h3>
-    </a>
-    <a href="yeni_basvuru.html" class="cat-card">
-      <div class="cat-icon">🍽️</div>
-      <h3>YEMEKHANE</h3>
-    </a>
-    <a href="yeni_basvuru.html" class="cat-card">
-      <div class="cat-icon">💻</div>
-      <h3>BİLGİ İŞLEM</h3>
-    </a>
+<!-- MAIN CONTENT / FEATURES -->
+<main class="section-padding" id="features" style="padding-top: 3rem;">
+  <div class="section-header">
+    <h2>Neden Kampüs Çözüm Merkezi?</h2>
+    <p>Akademik ve idari tüm süreçleri daha şeffaf, daha hızlı ve daha etkili yönetmek için tasarlanan kurumsal otomasyon sistemi.</p>
   </div>
 
-  <div class="cta-stats">
-    <a href="yeni_basvuru.html" class="btn-primary">HEMEN BAŞVURU OLUŞTUR</a>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">⚡</div>
+      <h3>Hızlı Çözüm</h3>
+      <p>Oluşturduğunuz talepler, aracı bürokratik aşamalar olmadan doğrudan ilgili dekanlık veya daire başkanlığına anında iletilir.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">👥</div>
+      <h3>Rol Tabanlı Erişim</h3>
+      <p>Öğrenci, Personel ve Yönetici (Admin) rolleri için özelleştirilmiş gelişmiş arabirimler ile güvenli ve hiyerarşik iş akışları.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">📋</div>
+      <h3>Şeffaf Takip</h3>
+      <p>Başvurularınızın durumunu (Beklemede, İnceleniyor, Çözüldü, Reddedildi) anlık olarak bilet sistemi üzerinden izleyin.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">💬</div>
+      <h3>Çift Yönlü Mesajlaşma</h3>
+      <p>Taleplerinizin detay sayfasında birim personelleriyle anlık mesajlaşarak eksik belgeleri veya ek bilgileri kolayca paylaşın.</p>
+    </div>
+  </div>
+
+  <!-- STATS PREVIEW -->
+  <div class="cta-stats" style="margin-top: 4rem; padding: 2rem 3rem;">
+    <div>
+      <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.5rem;">Üniversitemiz İçin Hep Daha İyisine</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; max-width: 600px; margin: 0;">Fırat Üniversitesi Kampüs Çözüm Merkezi ile bugüne kadar binlerce talebe başarıyla cevap verdik, süreçleri şeffaflaştırdık.</p>
+    </div>
     <div class="stats">
       <div class="stat">
-        <div class="stat-num green">1540</div>
-        <div class="stat-label">Çözülen</div>
+        <div class="stat-num green">1540+</div>
+        <div class="stat-label">Çözülen Başvuru</div>
       </div>
       <div class="stat">
         <div class="stat-num">121</div>
-        <div class="stat-label">Aktif</div>
+        <div class="stat-label">Aktif İnceleme</div>
       </div>
     </div>
   </div>
 </main>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-col">
@@ -90,6 +108,175 @@
   </div>
   <div class="footer-bottom">© 2024 Kampüs Çözüm Merkezi — HTML, CSS, JavaScript</div>
 </footer>
+
+<!-- INTERACTIVE LOGIN MODAL OVERLAY -->
+<div class="login-modal-overlay" id="loginModal">
+  <div class="login-container">
+    <button class="modal-close-btn" onclick="closeLoginModal()">✕</button>
+    
+    <div class="login-brand">
+      <div class="brand-logo">FÜ</div>
+      <h2 class="brand-name">Kampüs Çözüm Merkezi</h2>
+      <p class="brand-subtitle">Fırat Üniversitesi Portal Girişi</p>
+    </div>
+
+    <div class="login-tabs">
+      <button class="tab-btn active" id="tab-student" onclick="switchTab('student')">
+        <span>🎓</span> Öğrenci Girişi
+      </button>
+      <button class="tab-btn" id="tab-staff" onclick="switchTab('staff')">
+        <span>👤</span> Personel Girişi
+      </button>
+    </div>
+
+    <div id="errorBox" class="error-msg">Geçersiz kullanıcı adı veya şifre!</div>
+
+    <div class="login-form-wrapper">
+      <!-- STUDENT LOGIN FORM -->
+      <form id="studentForm" class="login-form active" onsubmit="handleLogin(event, 'student')">
+        <div class="input-group">
+          <label>Öğrenci E-postası</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="email" id="studentEmail" placeholder="ahmet.uzun@firat.edu.tr" required />
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>Şifre</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="studentPass" placeholder="••••••••" required />
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" checked /> Beni Hatırla
+          </label>
+          <a href="#" class="forgot-pass" onclick="alert('Şifre sıfırlama talebiniz öğrenci işlerine iletilmiştir.')">Şifremi Unuttum</a>
+        </div>
+
+        <button type="submit" class="btn-login">Giriş Yap</button>
+      </form>
+
+      <!-- STAFF LOGIN FORM -->
+      <form id="staffForm" class="login-form" onsubmit="handleLogin(event, 'staff')">
+        <div class="input-group">
+          <label>Personel E-postası</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="email" id="staffEmail" placeholder="hakan.demir@firat.edu.tr" required />
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>Şifre</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="staffPass" placeholder="••••••••" required />
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" checked /> Beni Hatırla
+          </label>
+          <a href="#" class="forgot-pass" onclick="alert('Şifre sıfırlama talebiniz bilgi işleme iletilmiştir.')">Şifremi Unuttum</a>
+        </div>
+
+        <button type="submit" class="btn-login">Giriş Yap</button>
+      </form>
+    </div>
+
+    <div class="demo-info">
+      <p>💡 Kolay Test Giriş Bilgileri:</p>
+      <ul id="credentialsList">
+        <li><strong>Öğrenci:</strong> ahmet.uzun@firat.edu.tr (Şifre: 123456)</li>
+        <li><strong>Personel:</strong> hakan.demir@firat.edu.tr (Şifre: 123456)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal toggle mechanisms
+  function openLoginModal() {
+    document.getElementById('loginModal').classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent background scrolling
+  }
+
+  function closeLoginModal() {
+    document.getElementById('loginModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal when clicking outside the modal box
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeLoginModal();
+    }
+  });
+
+  function switchTab(role) {
+    const tabStudent = document.getElementById('tab-student');
+    const tabStaff = document.getElementById('tab-staff');
+    const studentForm = document.getElementById('studentForm');
+    const staffForm = document.getElementById('staffForm');
+    const errorBox = document.getElementById('errorBox');
+    
+    errorBox.style.display = 'none';
+
+    if (role === 'student') {
+      tabStudent.classList.add('active');
+      tabStaff.classList.remove('active');
+      studentForm.classList.add('active');
+      staffForm.classList.remove('active');
+    } else {
+      tabStaff.classList.add('active');
+      tabStudent.classList.remove('active');
+      staffForm.classList.add('active');
+      studentForm.classList.remove('active');
+    }
+  }
+
+  function handleLogin(event, role) {
+    event.preventDefault();
+    const errorBox = document.getElementById('errorBox');
+    errorBox.style.display = 'none';
+
+    let email, pass;
+    if (role === 'student') {
+      email = document.getElementById('studentEmail').value.trim();
+      pass = document.getElementById('studentPass').value.trim();
+      
+      if (email === "ahmet.uzun@firat.edu.tr" && pass === "123456") {
+        window.location.href = "ogrenci_anasayfa.html";
+      } else if (pass.length >= 4) {
+        window.location.href = "ogrenci_anasayfa.html";
+      } else {
+        showError("Şifre en az 4 karakter olmalıdır!");
+      }
+    } else {
+      email = document.getElementById('staffEmail').value.trim();
+      pass = document.getElementById('staffPass').value.trim();
+
+      if (email === "hakan.demir@firat.edu.tr" && pass === "123456") {
+        window.location.href = "personel_paneli.html";
+      } else if (pass.length >= 4) {
+        window.location.href = "personel_paneli.html";
+      } else {
+        showError("Şifre en az 4 karakter olmalıdır!");
+      }
+    }
+  }
+
+  function showError(msg) {
+    const errorBox = document.getElementById('errorBox');
+    errorBox.textContent = msg;
+    errorBox.style.display = 'block';
+  }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personel Paneli — Kampüs Çözüm Merkezi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/personel_paneli.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="hamburger">☰</button>
+      <span class="header-title">Kampüs Çözüm Merkezi — Personel Paneli</span>
+    </div>
+    <div class="header-right">
+      <div class="user-dropdown">
+        <div class="header-user">
+          <div class="avatar" style="background: var(--primary);">HD</div>
+          Hakan Demir ▾
+        </div>
+        <div class="dropdown-content">
+          <a href="index.html" style="color: #dc3545;">🚪 Güvenli Çıkış</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-logo">
+      <div class="logo-sm">FÜ</div>
+      <span>Kampüs Çözüm<br/>Merkezi</span>
+    </div>
+    <nav>
+      <a href="personel_paneli.html" class="active">
+        <span class="icon">📥</span> Başvurular
+      </a>
+      <a href="#" onclick="alert('Raporlama modülü veritabanı bağlantısı ile aktif olacaktır.')">
+        <span class="icon">📊</span> İstatistikler
+      </a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <div class="page-title" style="margin-bottom: 0;">BİRİMİME GELEN BAŞVURULAR</div>
+      <span class="staff-badge">🏢 Bilgisayar Mühendisliği Birimi</span>
+    </div>
+
+    <!-- Stats row for staff -->
+    <div class="stats-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div class="card" style="margin-bottom: 0; padding: 1.2rem; text-align: center;">
+        <div class="stat-num" style="font-size: 1.8rem; font-weight: 800; color: var(--primary);" id="totalCount">4</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Toplam Başvuru</div>
+      </div>
+      <div class="card" style="margin-bottom: 0; padding: 1.2rem; text-align: center;">
+        <div class="stat-num" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);" id="pendingCount">2</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Bekleyen</div>
+      </div>
+      <div class="card" style="margin-bottom: 0; padding: 1.2rem; text-align: center;">
+        <div class="stat-num" style="font-size: 1.8rem; font-weight: 800; color: #2e9e5b;" id="solvedCount">1</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Çözülen</div>
+      </div>
+    </div>
+
+    <!-- Ticket list for staff -->
+    <div class="ticket-list" id="ticketList">
+      
+      <div class="ticket-row beklemede" data-id="127" data-status="Beklemede">
+        <div class="ticket-info-group">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge badge-yellow">⏳ Beklemede</span>
+            <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">#127</span>
+          </div>
+          <span class="ticket-title-text">Mühendislik Fakültesi - Ders Kaydı Sorunu</span>
+          <span class="ticket-sub-meta">Gönderen: Ahmet Uzun · Tarih: 20.04.2025</span>
+        </div>
+        <button class="btn-action" onclick="openReviewModal(127, 'Mühendislik Fakültesi - Ders Kaydı Sorunu', 'Ahmet Uzun', 'Beklemede', 'Ders kaydı yaparken sistem hata veriyor ve dersleri seçmeme izin vermiyor.')">İncele</button>
+      </div>
+
+      <div class="ticket-row islemde" data-id="128" data-status="İnceleniyor">
+        <div class="ticket-info-group">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge badge-blue">🔵 İnceleniyor</span>
+            <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">#128</span>
+          </div>
+          <span class="ticket-title-text">Bilgisayar Laboratuvarı Yazılım Güncellemesi</span>
+          <span class="ticket-sub-meta">Gönderen: Mehmet Kaya · Tarih: 18.04.2025</span>
+        </div>
+        <button class="btn-action" onclick="openReviewModal(128, 'Bilgisayar Laboratuvarı Yazılım Güncellemesi', 'Mehmet Kaya', 'İnceleniyor', 'Yapay zeka dersi için gerekli olan Anaconda paketlerinin lab bilgisayarlarına kurulmasını talep ediyoruz.')">İncele</button>
+      </div>
+
+      <div class="ticket-row cozuldu" data-id="129" data-status="Çözüldü">
+        <div class="ticket-info-group">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge badge-green">✅ Çözüldü</span>
+            <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">#129</span>
+          </div>
+          <span class="ticket-title-text">Bilgi İşlem - Öğrenci E-posta Erişimi</span>
+          <span class="ticket-sub-meta">Gönderen: Sibel Yılmaz · Tarih: 15.04.2025</span>
+        </div>
+        <button class="btn-action" onclick="openReviewModal(129, 'Bilgi İşlem - Öğrenci E-posta Erişimi', 'Sibel Yılmaz', 'Çözüldü', 'Edu.tr uzantılı e-posta adresimin şifresini unuttum ve sıfırlayamıyorum.')">İncele</button>
+      </div>
+
+      <div class="ticket-row beklemede" data-id="130" data-status="Beklemede">
+        <div class="ticket-info-group">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge badge-yellow">⏳ Beklemede</span>
+            <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">#130</span>
+          </div>
+          <span class="ticket-title-text">Bölüm Seminer Salonu Rezervasyonu</span>
+          <span class="ticket-sub-meta">Gönderen: Can Demir · Tarih: 12.04.2025</span>
+        </div>
+        <button class="btn-action" onclick="openReviewModal(130, 'Bölüm Seminer Salonu Rezervasyonu', 'Can Demir', 'Beklemede', 'Yarın saat 14:00 için seminer salonunu öğrenci topluluğu etkinliği adına ayırtmak istiyoruz.')">İncele</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STAFF MODAL -->
+<div class="modal-overlay" id="reviewModalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="mTitle">Talep İnceleme</h3>
+      <button class="modal-close" onclick="closeReviewModal()">✕</button>
+    </div>
+    
+    <div class="detail-row"><span class="detail-label">Talep ID:</span><span class="detail-val" id="mIdVal">#127</span></div>
+    <div class="detail-row"><span class="detail-label">Başvuran:</span><span class="detail-val" id="mUserVal">Ahmet Uzun</span></div>
+    <div class="detail-row" style="margin-bottom: 1rem;"><span class="detail-label">Açıklama:</span><span class="detail-val" id="mDescVal" style="font-weight: 500; font-style: italic;">Açıklama yükleniyor...</span></div>
+
+    <!-- Message list -->
+    <div class="chat-box" id="reviewChatBox">
+      <!-- Default Student message -->
+    </div>
+
+    <!-- Reply input -->
+    <div class="chat-input">
+      <input type="text" id="replyInput" class="form-group" style="padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px;" placeholder="Öğrenciye yanıt yazın..." />
+      <button onclick="sendStaffReply()">Yanıtla</button>
+    </div>
+
+    <!-- Status updater -->
+    <div class="status-select-group">
+      <label style="font-size: 0.88rem; font-weight: 700; color: var(--primary);">Durum Güncelle:</label>
+      <select id="statusSelect" style="padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600;">
+        <option value="Beklemede">⏳ Beklemede</option>
+        <option value="İnceleniyor">🔵 İnceleniyor</option>
+        <option value="Çözüldü">✅ Çözüldü</option>
+        <option value="Reddedildi">❌ Reddedildi</option>
+      </select>
+      <button class="btn-sm" style="padding: 6px 14px;" onclick="updateTicketStatus()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeTicketId = null;
+
+  function openReviewModal(id, title, user, status, description) {
+    activeTicketId = id;
+    document.getElementById('mTitle').textContent = title;
+    document.getElementById('mIdVal').textContent = '#' + id;
+    document.getElementById('mUserVal').textContent = user;
+    document.getElementById('mDescVal').textContent = description;
+    document.getElementById('statusSelect').value = status;
+
+    // Reset Chat Box with student's original message and initial response
+    const chatBox = document.getElementById('reviewChatBox');
+    chatBox.innerHTML = `
+      <div class="msg msg-user">
+        <div class="msg-bubble">${description}</div>
+        <div class="msg-meta">${user} · Başvuru Mesajı</div>
+      </div>
+    `;
+
+    document.getElementById('reviewModalOverlay').classList.add('open');
+  }
+
+  function closeReviewModal() {
+    document.getElementById('reviewModalOverlay').classList.remove('open');
+    activeTicketId = null;
+  }
+
+  // Modal overlay click to close
+  document.getElementById('reviewModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeReviewModal();
+  });
+
+  function sendStaffReply() {
+    const input = document.getElementById('replyInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const chatBox = document.getElementById('reviewChatBox');
+    const now = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+
+    chatBox.innerHTML += `
+      <div class="msg msg-support">
+        <div class="msg-bubble">${text}</div>
+        <div class="msg-meta">Siz (Personel) · ${now}</div>
+      </div>
+    `;
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  // Handle Enter to reply
+  document.getElementById('replyInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sendStaffReply();
+  });
+
+  function updateTicketStatus() {
+    if (!activeTicketId) return;
+    const newStatus = document.getElementById('statusSelect').value;
+    
+    // Find matching ticket card in UI and update it
+    const ticketRow = document.querySelector(`.ticket-row[data-id="${activeTicketId}"]`);
+    if (ticketRow) {
+      ticketRow.setAttribute('data-status', newStatus);
+      
+      // Update badge in UI
+      const badgeContainer = ticketRow.querySelector('.badge');
+      if (newStatus === 'Beklemede') {
+        badgeContainer.className = 'badge badge-yellow';
+        badgeContainer.textContent = '⏳ Beklemede';
+        ticketRow.className = 'ticket-row beklemede';
+      } else if (newStatus === 'İnceleniyor') {
+        badgeContainer.className = 'badge badge-blue';
+        badgeContainer.textContent = '🔵 İnceleniyor';
+        ticketRow.className = 'ticket-row islemde';
+      } else if (newStatus === 'Çözüldü') {
+        badgeContainer.className = 'badge badge-green';
+        badgeContainer.textContent = '✅ Çözüldü';
+        ticketRow.className = 'ticket-row cozuldu';
+      } else if (newStatus === 'Reddedildi') {
+        badgeContainer.className = 'badge badge-gray';
+        badgeContainer.textContent = '❌ Reddedildi';
+        ticketRow.className = 'ticket-row reddedildi';
+      }
+    }
+
+    recalculateStats();
+    closeReviewModal();
+    alert('Başvuru durumu başarıyla güncellendi.');
+  }
+
+  function recalculateStats() {
+    const tickets = document.querySelectorAll('.ticket-row');
+    let total = tickets.length;
+    let pending = 0;
+    let solved = 0;
+
+    tickets.forEach(ticket => {
+      const status = ticket.getAttribute('data-status');
+      if (status === 'Beklemede' || status === 'İnceleniyor') {
+        pending++;
+      } else if (status === 'Çözüldü') {
+        solved++;
+      }
+    });
+
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('pendingCount').textContent = pending;
+    document.getElementById('solvedCount').textContent = solved;
+  }
+</script>
+
+</body>
+</html>

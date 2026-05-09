@@ -93,6 +93,8 @@ main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.5rem 3rem;
+  flex: 1;
+  width: 100%;
 }
 
 /* CATEGORIES */
