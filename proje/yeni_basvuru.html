@@ -58,41 +58,36 @@
     <div class="card">
       <form id="basvuruForm">
         <div class="form-group full" style="margin-bottom:1.2rem;">
-          <label>Title <span class="small-label">Varchar</span></label>
+          <label>Başlık (Baslik) <span class="small-label">Varchar</span></label>
           <input type="text" id="title" placeholder="Talebinizin başlığını yazın..." required />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Category</label>
+            <label>Kategori (KategoriID)</label>
             <select id="category" required>
-              <option value="">Seçiniz</option>
-              <option>Mühendislik Fakültesi</option>
-              <option>Öğrenci İşleri</option>
-              <option>Yemekhane</option>
-              <option>Bilgi İşlem</option>
+              <option value="">Kategori Seçiniz</option>
+              <option value="1">Altyapı ve İnternet Sorunları</option>
+              <option value="2">Ders Kayıtları ve Harç İşlemleri</option>
+              <option value="3">Yemekhane ve Beslenme Hizmetleri</option>
+              <option value="4">Kütüphane ve Çalışma Alanları</option>
+              <option value="5">Kulüp Faaliyetleri ve Etkinlikler</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Department</label>
+            <label>İlgili Birim (BirimID)</label>
             <select id="department" required>
-              <option value="">Seçiniz</option>
-              <option>Bilgisayar Mühendisliği</option>
-              <option>Elektrik-Elektronik</option>
-              <option>Öğrenci İşleri</option>
-              <option>Yurt Müdürlüğü</option>
+              <option value="">Birim Seçiniz</option>
+              <option value="1">Bilgi İşlem Daire Başkanlığı</option>
+              <option value="2">Öğrenci İşleri Daire Başkanlığı</option>
+              <option value="3">Mühendislik Fakültesi Dekanlığı</option>
+              <option value="4">Sağlık, Kültür ve Spor Daire Bşk. (SKS)</option>
+              <option value="5">Kütüphane ve Dokümantasyon Daire Bşk.</option>
             </select>
           </div>
         </div>
         <div class="form-group full" style="margin-bottom:1.2rem;">
-          <label>Description</label>
+          <label>Açıklama (Aciklama)</label>
           <textarea id="description" placeholder="Sorununuzu detaylı açıklayın..." required></textarea>
-        </div>
-        <div class="form-group full" style="margin-bottom:1.5rem;">
-          <label for="fileInput">
-            <span class="file-btn">📎 Ek Dosya Yükle</span>
-          </label>
-          <input type="file" id="fileInput" />
-          <span id="fileName" style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;"></span>
         </div>
         <button type="submit" class="submit-btn">BAŞVURUYU GÖNDER</button>
       </form>

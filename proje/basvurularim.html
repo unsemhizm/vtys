@@ -55,72 +55,60 @@
 
     <div class="filters">
       <button class="chip active" onclick="filterTickets('tumu', this)">Tümü</button>
-      <button class="chip" onclick="filterTickets('beklemede', this)">Beklemede</button>
-      <button class="chip" onclick="filterTickets('islemde', this)">İşlemde</button>
+      <button class="chip" onclick="filterTickets('acik', this)">Açık</button>
+      <button class="chip" onclick="filterTickets('inceleniyor', this)">İnceleniyor</button>
       <button class="chip" onclick="filterTickets('cozuldu', this)">Çözüldü</button>
-      <button class="chip" onclick="filterTickets('kapali', this)">Kapalı</button>
+      <button class="chip" onclick="filterTickets('reddedildi', this)">Reddedildi</button>
     </div>
 
     <div class="ticket-list">
 
-      <div class="ticket-card beklemede" data-status="beklemede">
+      <div class="ticket-card acik" data-status="acik">
         <div class="ticket-info">
           <div class="ticket-top">
-            <span class="ticket-id">#127</span>
-            <span class="badge badge-yellow">⏳ Beklemede</span>
+            <span class="ticket-id">#148</span>
+            <span class="badge" style="background:#EF4444;color:white;">Açık</span>
           </div>
-          <div class="ticket-title">Mühendislik Fakültesi - Ders Kaydı Sorunu</div>
-          <div class="ticket-meta">Mühendislik Fakültesi · 20.04.2025</div>
+          <div class="ticket-title">Yatay Geçiş Muafiyet Dilekçesi Onayı</div>
+          <div class="ticket-meta">Ders Kayıtları ve Harç İşlemleri · Öğrenci İşleri D.B. · 03.05.2026</div>
         </div>
-        <button class="btn-detail" onclick="openModal(127,'Mühendislik Fakültesi - Ders Kaydı Sorunu','Beklemede','Mühendislik Fakültesi','20.04.2025')">Detay</button>
+        <button class="btn-detail" onclick="openModal(148,'Yatay Geçiş Muafiyet Dilekçesi Onayı','Açık','Öğrenci İşleri D.B.','03.05.2026')">Detay</button>
       </div>
 
-      <div class="ticket-card islemde" data-status="islemde">
+      <div class="ticket-card inceleniyor" data-status="inceleniyor">
         <div class="ticket-info">
           <div class="ticket-top">
-            <span class="ticket-id">#128</span>
-            <span class="badge badge-blue">🔵 İşlemde</span>
+            <span class="ticket-id">#147</span>
+            <span class="badge" style="background:#F59E0B;color:white;">İnceleniyor</span>
           </div>
-          <div class="ticket-title">Yemekhane - Kart Bakiyesi Yüklenmiyor</div>
-          <div class="ticket-meta">Yemekhane · 18.04.2025</div>
+          <div class="ticket-title">Mühendislik Blokları Wi-Fi Kopma Sorunu</div>
+          <div class="ticket-meta">Altyapı ve İnternet Sorunları · Bilgi İşlem D.B. · 01.05.2026</div>
         </div>
-        <button class="btn-detail" onclick="openModal(128,'Yemekhane - Kart Bakiyesi Yüklenmiyor','İşlemde','Yemekhane','18.04.2025')">Detay</button>
+        <button class="btn-detail" onclick="openModal(147,'Mühendislik Blokları Wi-Fi Kopma Sorunu','İnceleniyor','Bilgi İşlem D.B.','01.05.2026')">Detay</button>
       </div>
 
       <div class="ticket-card cozuldu" data-status="cozuldu">
         <div class="ticket-info">
           <div class="ticket-top">
-            <span class="ticket-id">#129</span>
-            <span class="badge badge-green">✅ Çözüldü</span>
+            <span class="ticket-id">#149</span>
+            <span class="badge" style="background:#10B981;color:white;">Çözüldü</span>
           </div>
-          <div class="ticket-title">Bilgi İşlem - Öğrenci E-posta Erişimi</div>
-          <div class="ticket-meta">Bilgi İşlem · 15.04.2025</div>
+          <div class="ticket-title">Kütüphane Çalışma Salonu Klima Arızası</div>
+          <div class="ticket-meta">Kütüphane ve Çalışma Alanları · Kütüphane D.B. · 04.05.2026</div>
         </div>
-        <button class="btn-detail" onclick="openModal(129,'Bilgi İşlem - Öğrenci E-posta Erişimi','Çözüldü','Bilgi İşlem','15.04.2025')">Detay</button>
+        <button class="btn-detail" onclick="openModal(149,'Kütüphane Çalışma Salonu Klima Arızası','Çözüldü','Kütüphane D.B.','04.05.2026')">Detay</button>
       </div>
 
-      <div class="ticket-card beklemede" data-status="beklemede">
+      <div class="ticket-card reddedildi" data-status="reddedildi">
         <div class="ticket-info">
           <div class="ticket-top">
-            <span class="ticket-id">#130</span>
-            <span class="badge badge-yellow">⏳ Beklemede</span>
+            <span class="ticket-id">#140</span>
+            <span class="badge" style="background:#6B7280;color:white;">Reddedildi</span>
           </div>
-          <div class="ticket-title">Öğrenci İşleri - Transkript Talebi</div>
-          <div class="ticket-meta">Öğrenci İşleri · 12.04.2025</div>
+          <div class="ticket-title">Öğrenci Topluluğu Oda Tahsisi</div>
+          <div class="ticket-meta">Kulüp Faaliyetleri ve Etkinlikler · SKS Daire Bşk. · 20.04.2026</div>
         </div>
-        <button class="btn-detail" onclick="openModal(130,'Öğrenci İşleri - Transkript Talebi','Beklemede','Öğrenci İşleri','12.04.2025')">Detay</button>
-      </div>
-
-      <div class="ticket-card kapali" data-status="kapali">
-        <div class="ticket-info">
-          <div class="ticket-top">
-            <span class="ticket-id">#126</span>
-            <span class="badge badge-gray">⚫ Kapalı</span>
-          </div>
-          <div class="ticket-title">Kütüphane - Kitap Uzatma</div>
-          <div class="ticket-meta">Kütüphane · 05.04.2025</div>
-        </div>
-        <button class="btn-detail" onclick="openModal(126,'Kütüphane - Kitap Uzatma','Kapalı','Kütüphane','05.04.2025')">Detay</button>
+        <button class="btn-detail" onclick="openModal(140,'Öğrenci Topluluğu Oda Tahsisi','Reddedildi','SKS Daire Bşk.','20.04.2026')">Detay</button>
       </div>
 
     </div>

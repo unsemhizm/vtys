@@ -22,7 +22,8 @@
         <span>Fırat Üniversitesi</span>
       </div>
     </div>
-    <div class="header-right">
+    <div class="header-right" style="display: flex; gap: 10px;">
+      <button id="secretAdminBtn" class="btn-primary" style="display: none; padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: #dc3545;" onclick="openAdminModal()">Admin Girişi</button>
       <button class="btn-primary" style="padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: var(--accent);" onclick="openLoginModal()">Giriş Yap</button>
     </div>
   </div>
@@ -127,6 +128,9 @@
       <button class="tab-btn" id="tab-staff" onclick="switchTab('staff')">
         <span>👤</span> Personel Girişi
       </button>
+      <button class="tab-btn" id="tab-admin" style="display: none;" onclick="switchTab('admin')">
+        <span>🔑</span> Yönetici
+      </button>
     </div>
 
     <div id="errorBox" class="error-msg">Geçersiz kullanıcı adı veya şifre!</div>
@@ -187,6 +191,27 @@
 
         <button type="submit" class="btn-login">Giriş Yap</button>
       </form>
+
+      <!-- ADMIN LOGIN FORM -->
+      <form id="adminForm" class="login-form" onsubmit="handleLogin(event, 'admin')">
+        <div class="input-group">
+          <label>Yönetici E-postası</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="email" id="adminEmail" placeholder="admin@firat.edu.tr" required />
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>Şifre</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="adminPass" placeholder="••••••••" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" style="background: #dc3545; box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4); margin-top: 1rem;">Sistem Yöneticisi Girişi</button>
+      </form>
     </div>
 
     <div class="demo-info">
@@ -194,6 +219,7 @@
       <ul id="credentialsList">
         <li><strong>Öğrenci:</strong> ahmet.uzun@firat.edu.tr (Şifre: 123456)</li>
         <li><strong>Personel:</strong> hakan.demir@firat.edu.tr (Şifre: 123456)</li>
+        <li id="demoAdminItem" style="display: none; color: #dc3545;"><strong>Admin:</strong> admin@firat.edu.tr (Şifre: 123456)</li>
       </ul>
     </div>
   </div>
@@ -202,8 +228,23 @@
 <script>
   // Modal toggle mechanisms
   function openLoginModal() {
+    // Sadece standart butonla açıldığında admin sekmesini gizle ve öğrenciye dön
+    document.getElementById('tab-admin').style.display = 'none';
+    document.getElementById('demoAdminItem').style.display = 'none';
+    switchTab('student');
+    
     document.getElementById('loginModal').classList.add('open');
     document.body.style.overflow = 'hidden'; // prevent background scrolling
+  }
+
+  function openAdminModal() {
+    // Özel admin butonu ile açıldığında admin sekmesini göster ve seç
+    document.getElementById('tab-admin').style.display = 'flex';
+    document.getElementById('demoAdminItem').style.display = 'block';
+    
+    document.getElementById('loginModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    switchTab('admin');
   }
 
   function closeLoginModal() {
@@ -221,22 +262,31 @@
   function switchTab(role) {
     const tabStudent = document.getElementById('tab-student');
     const tabStaff = document.getElementById('tab-staff');
+    const tabAdmin = document.getElementById('tab-admin');
     const studentForm = document.getElementById('studentForm');
     const staffForm = document.getElementById('staffForm');
+    const adminForm = document.getElementById('adminForm');
     const errorBox = document.getElementById('errorBox');
     
     errorBox.style.display = 'none';
 
+    // Reset all tabs
+    tabStudent.classList.remove('active');
+    tabStaff.classList.remove('active');
+    tabAdmin.classList.remove('active');
+    studentForm.classList.remove('active');
+    staffForm.classList.remove('active');
+    adminForm.classList.remove('active');
+
     if (role === 'student') {
       tabStudent.classList.add('active');
-      tabStaff.classList.remove('active');
       studentForm.classList.add('active');
-      staffForm.classList.remove('active');
-    } else {
+    } else if (role === 'staff') {
       tabStaff.classList.add('active');
-      tabStudent.classList.remove('active');
       staffForm.classList.add('active');
-      studentForm.classList.remove('active');
+    } else if (role === 'admin') {
+      tabAdmin.classList.add('active');
+      adminForm.classList.add('active');
     }
   }
 
@@ -257,7 +307,7 @@
       } else {
         showError("Şifre en az 4 karakter olmalıdır!");
       }
-    } else {
+    } else if (role === 'staff') {
       email = document.getElementById('staffEmail').value.trim();
       pass = document.getElementById('staffPass').value.trim();
 
@@ -268,6 +318,17 @@
       } else {
         showError("Şifre en az 4 karakter olmalıdır!");
       }
+    } else if (role === 'admin') {
+      email = document.getElementById('adminEmail').value.trim();
+      pass = document.getElementById('adminPass').value.trim();
+
+      if (email === "admin@firat.edu.tr" && pass === "123456") {
+        window.location.href = "admin_paneli.html";
+      } else if (pass.length >= 4) {
+        window.location.href = "admin_paneli.html";
+      } else {
+        showError("Yönetici şifresi en az 4 karakter olmalıdır!");
+      }
     }
   }
 
@@ -276,6 +337,39 @@
     errorBox.textContent = msg;
     errorBox.style.display = 'block';
   }
+
+  // Secret Key Combination (Easter Egg)
+  let secretCode = "admin";
+  let inputSequence = "";
+  let adminBtnTimer = null;
+
+  document.addEventListener('keydown', function(e) {
+    // Ignore if typing in input fields
+    if (e.target.tagName.toLowerCase() === 'input' || e.target.tagName.toLowerCase() === 'textarea') return;
+
+    inputSequence += e.key.toLowerCase();
+    
+    // Keep sequence length same as secret code
+    if (inputSequence.length > secretCode.length) {
+      inputSequence = inputSequence.substring(1);
+    }
+
+    if (inputSequence === secretCode) {
+      const adminBtn = document.getElementById('secretAdminBtn');
+      adminBtn.style.display = 'block'; // Show button
+      
+      // Clear sequence to prevent multiple triggers
+      inputSequence = "";
+
+      // Clear existing timer if triggered again
+      if (adminBtnTimer) clearTimeout(adminBtnTimer);
+
+      // Hide after 10 seconds
+      adminBtnTimer = setTimeout(() => {
+        adminBtn.style.display = 'none';
+      }, 10000);
+    }
+  });
 </script>
 
 </body>
