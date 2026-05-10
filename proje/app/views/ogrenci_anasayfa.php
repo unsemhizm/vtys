@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Öğrenci Paneli — Kampüs Çözüm Merkezi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.php?controller=kullanici&action=ogrenciPaneli" class="header-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-circle">FÜ</div>
+      <div>
+        <h1>Kampüs Çözüm Merkezi</h1>
+        <span>Fırat Üniversitesi</span>
+      </div>
+    </a>
+    <div class="header-right">
+      <div class="user-dropdown">
+        <div class="header-user">
+          <?php echo $_SESSION['ad_soyad']; ?>
+        </div> <div class="dropdown-content">
+          <a href="index.php?controller=kullanici&action=basvurularim">📋 Başvurularım</a>
+          <a href="index.php?controller=kullanici&action=yeniBasvuru">✏️ Yeni Başvuru</a>
+          <a href="index.php?controller=kullanici&action=profil">👤 Profilim</a>
+          <a href="index.php?controller=auth&action=logout" class="logout-btn">Çıkış Yap</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>FIRAT ÜNİVERSİTESİ — KAMPÜS ÇÖZÜM MERKEZİ</h2>
+  <div class="search-bar">
+    <input type="text" placeholder="Sorununuz nedir? Aratın..." />
+    <button>🔍</button>
+  </div>
+</div>
+
+<main>
+  <p class="section-title">Kategoriler</p>
+  <div class="categories">
+    <a href="index.php?controller=kullanici&action=yeniBasvuru" class="cat-card">
+      <div class="cat-icon">💻</div>
+      <h3>ALTYAPI VE İNTERNET</h3>
+    </a>
+    <a href="index.php?controller=kullanici&action=yeniBasvuru" class="cat-card">
+      <div class="cat-icon">🎓</div>
+      <h3>DERS KAYITLARI</h3>
+    </a>
+    <a href="index.php?controller=kullanici&action=yeniBasvuru" class="cat-card">
+      <div class="cat-icon">🍽️</div>
+      <h3>YEMEKHANE HİZMETLERİ</h3>
+    </a>
+    <a href="index.php?controller=kullanici&action=yeniBasvuru" class="cat-card">
+      <div class="cat-icon">📚</div>
+      <h3>KÜTÜPHANE ALANLARI</h3>
+    </a>
+  </div>
+
+  <div class="cta-stats">
+    <a href="index.php?controller=kullanici&action=yeniBasvuru" class="btn-primary">HEMEN BAŞVURU OLUŞTUR</a>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num green">1540</div>
+        <div class="stat-label">Çözülen</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">121</div>
+        <div class="stat-label">Aktif</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>📍 Fırat Üniversitesi</h4>
+      <p>0424.300.1666<br />0424.219.376<br />email.firat@gmail.com</p>
+    </div>
+    <div class="footer-col">
+      <h4>📍 Lojent</h4>
+      <p>Fırat Üniversitesi<br />Fırat Üniversitesi</p>
+    </div>
+    <div class="footer-col">
+      <h4>📍 Loonmate</h4>
+      <p>Kampüs Çözüm Merkezi<br />Camino: 73225001</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2024 Kampüs Çözüm Merkezi — HTML, CSS, JavaScript</div>
+</footer>
+
+</body>
+</html>
