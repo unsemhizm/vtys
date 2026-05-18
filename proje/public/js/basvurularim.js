@@ -11,9 +11,6 @@ function filterTickets(status, el) {
   });
 }
 
-// Modal aç
-function openModal(id, title, status, cat, date) {
- // Modal aç fonksiyonunu dinamik mesaj çekecek şekilde güncelliyoruz:
 function openModal(id, title, status, cat, date) {
   // 1. Üst bilgileri doldur
   document.getElementById('modalTitle').textContent = title;
@@ -62,7 +59,6 @@ function openModal(id, title, status, cat, date) {
       console.error("Mesajlar çekilemedi: ", err);
       chatBox.innerHTML = '<div style="text-align:center; color:red;">Mesajlar yüklenirken bir hata oluştu. Henüz backend bağlanmamış olabilir.</div>';
     });
-}
 }
 
 // Modal kapat (overlay tıklaması)

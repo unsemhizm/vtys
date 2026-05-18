@@ -1,11 +1,12 @@
 <?php
+// public/index.php
+
 // Oturum (Session) işlemlerini başlatıyoruz
 session_start();
 
 // Gerekli çekirdek dosyaları dahil edelim
 require_once '../config/config.php';
 require_once '../app/core/Controller.php';
-
 
 // URL'den gelen controller ve action değerlerini alıyoruz.
 $controllerParam = isset($_GET['controller']) ? $_GET['controller'] : 'auth';

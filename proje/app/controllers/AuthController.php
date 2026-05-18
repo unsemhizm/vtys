@@ -42,7 +42,7 @@ class AuthController extends Controller {
                             $_SESSION['rol'] = $kullanici['RolAdi'];
                             $_SESSION['birim_id'] = $kullanici['BirimID'];
 
-                            // Rolüne göre ilgili paneline yönlendir
+                            // Giriş başarılı olduktan sonraki yönlendirme kısmı böyle olmalı:
                             if ($kullanici['RolAdi'] == 'Öğrenci') {
                                 header("Location: index.php?controller=kullanici&action=ogrenciPaneli");
                             } elseif ($kullanici['RolAdi'] == 'Personel') {

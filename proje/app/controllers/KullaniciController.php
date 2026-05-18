@@ -3,51 +3,90 @@
 
 class KullaniciController extends Controller {
 
-    // Kurucu metod: Bu controller'a gelen herkesin giriş yapmış olması lazım!
     public function __construct() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION['kullanici_id'])) {
-            // Giriş yapmamışsa logine geri gönder
             header("Location: index.php?controller=auth&action=login");
             exit();
         }
     }
 
-    // Öğrenci Anasayfasını Yükleyen Metod
     public function ogrenciPaneli() {
-        // Güvenlik: Sadece rolü "Öğrenci" olanlar girebilir
         if ($_SESSION['rol'] != 'Öğrenci') {
-            die("Hata: Bu sayfaya erişim yetkiniz yok.");
+            header("Location: index.php?controller=kullanici&action=personelPaneli");
+            exit();
         }
-
-        // View'ı çağır
-        $this->view('ogrenci_anasayfa');
+        
+        $basvuruModel = $this->model('BasvuruModel');
+        $id = $_SESSION['kullanici_id'];
+        
+        // Ana sayfayı dolduracak verileri çekiyoruz
+        $data = [
+            'istatistik'  => $basvuruModel->ogrenciIstatistikleri($id),
+            'son_basvuru' => $basvuruModel->ogrenciSonBasvuru($id)
+        ];
+        
+        $this->view('ogrenci_anasayfa', $data);
     }
 
-    // Personel Anasayfasını Yükleyen Metod
     public function personelPaneli() {
-        // Güvenlik: Sadece rolü "Personel" olanlar girebilir
         if ($_SESSION['rol'] != 'Personel') {
-            die("Hata: Bu sayfaya erişim yetkiniz yok.");
+            header("Location: index.php?controller=kullanici&action=ogrenciPaneli");
+            exit();
         }
+        $birim_id = $_SESSION['birim_id']; 
+        $basvuruModel = $this->model('BasvuruModel');
+        $basvurular = $basvuruModel->birimBasvurulariniGetir($birim_id);
 
-        // View'ı çağır
-        $this->view('personel_paneli');
+        $this->view('personel_paneli', ['basvurular' => $basvurular]);
     }
 
-    // Başvurularım Sayfasını Yükleyen Metod (EKSİK OLAN KISIM)
     public function basvurularim() {
         $kullanici_id = $_SESSION['kullanici_id'];
-
-        // Modeli yükle ve verileri çek
         $basvuruModel = $this->model('BasvuruModel');
         $basvurular = $basvuruModel->ogrenciBasvurulariniGetir($kullanici_id);
 
-        // Verileri view (görünüm) dosyasına gönder
         $this->view('basvurularim', ['basvurular' => $basvurular]);
     }
 
-    // Yeni Başvuru Sayfasını Yükleyen Metod
     public function yeniBasvuru() {
-        $this->view('yeni_basvuru');
+        if ($_SESSION['rol'] != 'Öğrenci') {
+            die("Sadece öğrenciler başvuru oluşturabilir.");
+        }
+        $basvuruModel = $this->model('BasvuruModel');
+        $data = [
+            'kategoriler' => $basvuruModel->tumKategorileriGetir(),
+            'birimler'    => $basvuruModel->tumBirimleriGetir()
+        ];
+        $this->view('yeni_basvuru', $data);
+    }
+
+    // --- YENİ KULLANICI PROFİL ÖZELLİĞİ ---
+    public function profil() {
+        $kullaniciModel = $this->model('KullaniciModel');
+        $mesaj = '';
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $updateData = [
+                'kullanici_id' => $_SESSION['kullanici_id'],
+                'ad_soyad'     => trim($_POST['ad_soyad']),
+                'eposta'       => trim($_POST['eposta']),
+                'sifre'        => !empty($_POST['sifre']) ? $_POST['sifre'] : '',
+                'rol_id'       => $_SESSION['rol'] == 'Öğrenci' ? 1 : ($_SESSION['rol'] == 'Personel' ? 2 : 3),
+                'birim_id'     => isset($_SESSION['birim_id']) ? $_SESSION['birim_id'] : null
+            ];
+
+            if ($kullaniciModel->kullaniciGuncelle($updateData)) {
+                $_SESSION['ad_soyad'] = $updateData['ad_soyad'];
+                $mesaj = '<div style="background:#10b981; color:white; padding:10px; border-radius:6px; margin-bottom:15px;">Profiliniz başarıyla güncellendi!</div>';
+            } else {
+                $mesaj = '<div style="background:#ef4444; color:white; padding:10px; border-radius:6px; margin-bottom:15px;">Güncelleme sırasında bir hata oluştu.</div>';
+            }
+        }
+
+        $user = $kullaniciModel->kullaniciGetirId($_SESSION['kullanici_id']);
+        $this->view('KullaniciProfil', ['user' => $user, 'mesaj' => $mesaj]);
     }
 }

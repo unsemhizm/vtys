@@ -13,19 +13,17 @@
 <header>
   <div class="header-inner">
     <a href="index.php?controller=kullanici&action=ogrenciPaneli" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
-      <button class="hamburger">☰</button>
       <span class="header-title">Kampüs Çözüm Merkezi</span>
     </a>
     <div class="header-right">
       <div class="user-dropdown">
         <div class="header-user">
-          <div class="avatar">KV</div>
+          <div class="avatar">Ö</div>
           <?php echo $_SESSION['ad_soyad']; ?> ▾
         </div>
         <div class="dropdown-content">
           <a href="index.php?controller=kullanici&action=basvurularim">📋 Başvurularım</a>
           <a href="index.php?controller=kullanici&action=yeniBasvuru">✏️ Yeni Başvuru</a>
-          <a href="index.php?controller=kullanici&action=profil">👤 Profilim</a>
           <a href="index.php?controller=auth&action=logout" style="border-top: 1px solid var(--border); color: #dc3545;">🚪 Çıkış Yap</a>
         </div>
       </div>
@@ -35,72 +33,89 @@
 
 <div class="layout">
   <aside>
-    <a href="index.php?controller=kullanici&action=ogrenciPaneli" class="sidebar-logo" style="text-decoration: none;">
+    <div class="sidebar-logo">
       <div class="logo-sm">FÜ</div>
-      <span>Kampüs Çözüm<br/>Merkezi</span>
-    </a>
+      <span>Öğrenci<br/>Paneli</span>
+    </div>
     <nav>
-      <a href="index.php?controller=kullanici&action=ogrenciPaneli">
-        <span class="icon">🏠</span> Ana Sayfa
-      </a>
-      <a href="index.php?controller=kullanici&action=basvurularim">
-        <span class="icon">📋</span> Başvurularım
-      </a>
-      <a href="index.php?controller=kullanici&action=yeniBasvuru" class="active">
-        <span class="icon">✏️</span> Yeni Başvuru
-      </a>
+      <a href="index.php?controller=kullanici&action=ogrenciPaneli"><span class="icon">🏠</span> Ana Sayfa</a>
+      <a href="index.php?controller=kullanici&action=basvurularim"><span class="icon">📋</span> Başvurularım</a>
+      <a href="index.php?controller=kullanici&action=yeniBasvuru" class="active"><span class="icon">✏️</span> Yeni Başvuru</a>
     </nav>
   </aside>
 
   <div class="content">
-    <div class="page-title">YENİ BAŞVURU</div>
+    <div style="margin-bottom: 15px;">
+        <a href="index.php?controller=kullanici&action=ogrenciPaneli" style="text-decoration: none; color: var(--primary); font-weight: bold;">
+            <i class="fas fa-chevron-left"></i> Ana Sayfaya Dön
+        </a>
+    </div>
 
-    <div class="card">
-      <form id="basvuruForm" method="POST" action="index.php?controller=basvuru&action=kaydet">
-        
-        <?php if(isset($data['mesaj'])): ?>
-            <div style="padding: 12px; margin-bottom: 15px; border-radius: 5px; color: white; font-weight: bold; background-color: <?php echo $data['tur'] == 'basari' ? '#10B981' : '#EF4444'; ?>">
-                <?php echo $data['mesaj']; ?>
-            </div>
-        <?php endif; ?>
-
-        <div class="form-group full" style="margin-bottom:1.2rem;">
-          <label>Başlık (Baslik)</label>
-          <input type="text" name="baslik" id="title" placeholder="Talebinizin başlığını yazın..." required />
+    <?php if(!isset($data) || !isset($data['kategoriler'])): ?>
+        <div style="background:#ef4444; color:white; padding:15px; border-radius:8px; margin-bottom:20px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+            <strong>🚨 SİSTEM UYARISI (HATA TESPİT EDİLDİ):</strong><br>
+            Şu anda bu sayfaya <u>yanlış bir linkten</u> (doğrudan .php dosyasına tıklayarak) giriyorsunuz. MVC yapısında dosyalar doğrudan açılamaz.<br><br>
+            <strong>Çözüm:</strong> Lütfen adres çubuğuna şu linki yapıştırarak girin:<br>
+            <code>http://localhost/vtys/proje/public/index.php?controller=kullanici&action=yeniBasvuru</code>
         </div>
+    <?php endif; ?>
+    <div class="page-title">YENİ DESTEK TALEBİ OLUŞTUR</div>
+
+    <div class="card" style="max-width: 800px;">
+      <h2 class="card-title">Başvuru Formu</h2>
+      
+      <form action="index.php?controller=basvuru&action=kaydet" method="POST">
         <div class="form-row">
+          
           <div class="form-group">
-            <label>Kategori (KategoriID)</label>
-            <select name="kategori_id" id="category" required>
-              <option value="">Kategori Seçiniz</option>
-              <option value="1">Altyapı ve İnternet Sorunları</option>
-              <option value="2">Ders Kayıtları ve Harç İşlemleri</option>
-              <option value="3">Yemekhane ve Beslenme Hizmetleri</option>
-              <option value="4">Kütüphane ve Çalışma Alanları</option>
-              <option value="5">Kulüp Faaliyetleri ve Etkinlikler</option>
+            <label>Sorunun Kategorisi</label>
+            <select name="kategori_id" required>
+              <option value="">-- Kategori Seçiniz --</option>
+              <?php 
+              if(isset($data['kategoriler']) && count($data['kategoriler']) > 0) {
+                  foreach($data['kategoriler'] as $kat) {
+                      echo '<option value="'.$kat['KategoriID'].'">'.htmlspecialchars($kat['KategoriAdi']).'</option>';
+                  }
+              } elseif(isset($data['kategoriler'])) {
+                  echo '<option value="" disabled>⚠️ DİKKAT: Veritabanında (kategoriler) tablosu BOŞ!</option>';
+              }
+              ?>
             </select>
           </div>
+
           <div class="form-group">
-            <label>İlgili Birim (BirimID)</label>
-            <select name="birim_id" id="department" required>
-              <option value="">Birim Seçiniz</option>
-              <option value="1">Bilgi İşlem Daire Başkanlığı</option>
-              <option value="2">Öğrenci İşleri Daire Başkanlığı</option>
-              <option value="3">Mühendislik Fakültesi Dekanlığı</option>
-              <option value="4">Sağlık, Kültür ve Spor Daire Bşk. (SKS)</option>
-              <option value="5">Kütüphane ve Dokümantasyon Daire Bşk.</option>
+            <label>İlgili İdari Birim / Fakülte</label>
+            <select name="birim_id" required>
+              <option value="">-- Birim Seçiniz --</option>
+              <?php 
+              if(isset($data['birimler']) && count($data['birimler']) > 0) {
+                  foreach($data['birimler'] as $birim) {
+                      echo '<option value="'.$birim['BirimID'].'">'.htmlspecialchars($birim['BirimAdi']).'</option>';
+                  }
+              } elseif(isset($data['birimler'])) {
+                  echo '<option value="" disabled>⚠️ DİKKAT: Veritabanında (birimler) tablosu BOŞ!</option>';
+              }
+              ?>
             </select>
           </div>
+
+          <div class="form-group full">
+            <label>Konu / Başlık</label>
+            <input type="text" name="baslik" placeholder="Sorununuzu veya talebinizi birkaç kelime ile özetleyin..." required />
+          </div>
+
+          <div class="form-group full">
+            <label>Detaylı Açıklama</label>
+            <textarea name="aciklama" placeholder="Lütfen sorununuzu tüm detaylarıyla ve anlaşılır bir dille anlatın..." required style="min-height:150px;"></textarea>
+          </div>
         </div>
-        <div class="form-group full" style="margin-bottom:1.2rem;">
-          <label>Açıklama (Aciklama)</label>
-          <textarea name="aciklama" id="description" placeholder="Sorununuzu detaylı açıklayın..." required></textarea>
+
+        <div style="margin-top: 1.5rem; text-align: right;">
+          <button type="submit" class="btn-primary" style="padding: 10px 25px; font-size: 1rem; cursor:pointer;">Talebi Gönder</button>
         </div>
-        <button type="submit" class="submit-btn">BAŞVURUYU GÖNDER</button>
       </form>
     </div>
   </div>
 </div>
-
 </body>
 </html>
