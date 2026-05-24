@@ -61,6 +61,12 @@
     <?php endif; ?>
     <div class="page-title">YENİ DESTEK TALEBİ OLUŞTUR</div>
 
+    <?php if(isset($data['mesaj'])): ?>
+        <div style="background:<?php echo $data['tur'] == 'basari' ? '#10b981' : '#ef4444'; ?>; color:white; padding:15px; border-radius:8px; margin-bottom:20px; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-weight:bold;">
+            <?php echo $data['mesaj']; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="card" style="max-width: 800px;">
       <h2 class="card-title">Başvuru Formu</h2>
       

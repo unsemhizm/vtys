@@ -5,9 +5,9 @@ class YanitModel {
 
     public function yanitlariGetir($basvuru_id) {
         $sql = "SELECT y.*, k.AdSoyad, r.RolAdi 
-                FROM Yanitlar y
-                INNER JOIN Kullanicilar k ON y.YanitlayanID = k.KullaniciID
-                INNER JOIN Roller r ON k.RolID = r.RolID
+                FROM yanitlar y
+                INNER JOIN kullanicilar k ON y.YanitlayanID = k.KullaniciID
+                INNER JOIN roller r ON k.RolID = r.RolID
                 WHERE y.BasvuruID = :id ORDER BY y.GonderilmeTarihi ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id' => $basvuru_id]);
@@ -15,9 +15,18 @@ class YanitModel {
     }
 
     public function yanitEkle($basvuru_id, $yanitlayan_id, $mesaj) {
-        $sql = "INSERT INTO Yanitlar (BasvuruID, YanitlayanID, Mesaj) VALUES (:bid, :yid, :msg)";
+        $sql = "INSERT INTO yanitlar (BasvuruID, YanitlayanID, Mesaj) VALUES (:bid, :yid, :msg)";
         return $this->db->prepare($sql)->execute([
             ':bid' => $basvuru_id, ':yid' => $yanitlayan_id, ':msg' => $mesaj
+        ]);
+    }
+
+    public function mesajlariOkunduYap($basvuru_id, $kullanici_id) {
+        $sql = "UPDATE yanitlar SET Okundu = 1 WHERE BasvuruID = :basvuru_id AND YanitlayanID != :kullanici_id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':basvuru_id' => $basvuru_id,
+            ':kullanici_id' => $kullanici_id
         ]);
     }
 }

@@ -148,7 +148,7 @@
           <label>Öğrenci E-postası</label>
           <div class="input-wrapper">
             <span class="input-icon">📧</span>
-            <input type="email" name="eposta" id="studentEmail" placeholder="ahmet.uzun@firat.edu.tr" required />
+            <input type="email" name="eposta" id="studentEmail" placeholder="yusuf.can@ogrenci.kampus.edu.tr" required />
           </div>
         </div>
         
@@ -177,7 +177,7 @@
           <label>Personel E-postası</label>
           <div class="input-wrapper">
             <span class="input-icon">📧</span>
-            <input type="email" name="eposta" id="staffEmail" placeholder="hakan.demir@firat.edu.tr" required />
+            <input type="email" name="eposta" id="staffEmail" placeholder="ogris.gorevli@kampus.edu.tr" required />
           </div>
         </div>
         
@@ -206,7 +206,7 @@
           <label>Yönetici E-postası</label>
           <div class="input-wrapper">
             <span class="input-icon">📧</span>
-            <input type="email" name="eposta" id="adminEmail" placeholder="admin@firat.edu.tr" required />
+            <input type="email" name="eposta" id="adminEmail" placeholder="admin@kampus.edu.tr" required />
           </div>
         </div>
         
@@ -226,9 +226,9 @@
     <div class="demo-info">
       <p>💡 Kolay Test Giriş Bilgileri:</p>
       <ul id="credentialsList">
-        <li><strong>Öğrenci:</strong> ahmet.uzun@firat.edu.tr (Şifre: 123456)</li>
-        <li><strong>Personel:</strong> hakan.demir@firat.edu.tr (Şifre: 123456)</li>
-        <li id="demoAdminItem" style="display: none; color: #dc3545;"><strong>Admin:</strong> admin@firat.edu.tr (Şifre: 123456)</li>
+        <li><strong>Öğrenci:</strong> yusuf.can@ogrenci.kampus.edu.tr (Şifre: sifre123)</li>
+        <li><strong>Personel:</strong> ogris.gorevli@kampus.edu.tr (Şifre: sifre123)</li>
+        <li id="demoAdminItem" style="display: none; color: #dc3545;"><strong>Admin:</strong> admin@kampus.edu.tr (Şifre: sifre123)</li>
       </ul>
     </div>
   </div>

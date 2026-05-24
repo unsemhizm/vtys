@@ -25,7 +25,7 @@
         <div class="dropdown-content">
           <a href="index.php?controller=kullanici&action=profil">👤 Profil Ayarlarım</a>
           <a href="index.php?controller=kullanici&action=basvurularim">📋 Başvurularım</a>
-          <a href="index.php?controller=basvuru&action=yeniBasvuru">✏️ Yeni Başvuru</a>
+          <a href="index.php?controller=kullanici&action=yeniBasvuru">✏️ Yeni Başvuru</a>
           <a href="index.php?controller=auth&action=logout" style="border-top: 1px solid var(--border); color: #dc3545;">🚪 Çıkış Yap</a>
         </div>
       </div>
@@ -42,7 +42,7 @@
     <nav>
       <a href="index.php?controller=kullanici&action=ogrenciPaneli"><span class="icon">🏠</span> Ana Sayfa</a>
       <a href="index.php?controller=kullanici&action=basvurularim" class="active"><span class="icon">📋</span> Başvurularım</a>
-      <a href="index.php?controller=basvuru&action=yeniBasvuru"><span class="icon">✏️</span> Yeni Başvuru</a>  
+      <a href="index.php?controller=kullanici&action=yeniBasvuru"><span class="icon">✏️</span> Yeni Başvuru</a>  
     </nav>
   </aside>
 
@@ -59,6 +59,11 @@
                 <span class="badge" style="background:<?php echo $basvuru['RenkKodu']; ?>;color:white;">
                     <?php echo $basvuru['DurumAdi']; ?>
                 </span>
+                <?php if(isset($basvuru['OkunmamisSayisi']) && $basvuru['OkunmamisSayisi'] > 0): ?>
+                    <span class="badge" style="background:#ef4444;color:white;margin-left:5px;font-weight:bold;">
+                        🔴 <?php echo $basvuru['OkunmamisSayisi']; ?> Yeni Mesaj
+                    </span>
+                <?php endif; ?>
               </div>
               <div class="ticket-title"><?php echo $basvuru['Baslik']; ?></div>
               <div class="ticket-meta">

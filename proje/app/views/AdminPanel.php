@@ -37,7 +37,7 @@
     <div class="stats-grid">
       <div class="stat-mini" style="border-color: #1a3a6b;">
         <h4 style="margin:0; color:#666;">Toplam</h4>
-        <p style="font-size:1.8rem; font-weight:800; margin:5px 0 0 0; color:#1a3a6b;"><?php echo $data['topham_bilet'] ?? $data['toplam_bilet']; ?></p>
+        <p style="font-size:1.8rem; font-weight:800; margin:5px 0 0 0; color:#1a3a6b;"><?php echo $data['toplam_bilet']; ?></p>
       </div>
       <div class="stat-mini" style="border-color: #ef4444;">
         <h4 style="margin:0; color:#666;">Açık</h4>
@@ -54,6 +54,135 @@
       <div class="stat-mini" style="border-color: #6b7280;">
         <h4 style="margin:0; color:#666;">Reddedilen</h4>
         <p style="font-size:1.8rem; font-weight:800; margin:5px 0 0 0; color:#6b7280;"><?php echo $data['red_bilet']; ?></p>
+      </div>
+    </div>
+
+    <!-- GELİŞMİŞ İSTATİSTİKLER BÖLÜMÜ -->
+    <?php $ozet = $data['genel_ozet'] ?? []; $kullanici = $data['kullanici_ozeti'] ?? []; ?>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom:25px;">
+      
+      <!-- BU HAFTA / BU AY -->
+      <div class="card" style="border-top:4px solid #8b5cf6;">
+        <h3 style="margin-top:0; color:#8b5cf6; font-size:0.95rem;">📅 Dönemsel Başvurular</h3>
+        <div style="display:flex; justify-content:space-around; text-align:center; margin-top:15px;">
+          <div>
+            <div style="font-size:1.8rem; font-weight:800; color:#8b5cf6;"><?php echo $ozet['BuHafta'] ?? 0; ?></div>
+            <div style="font-size:0.8rem; color:#888; font-weight:600;">Bu Hafta</div>
+          </div>
+          <div style="width:1px; background:#f0f0f0;"></div>
+          <div>
+            <div style="font-size:1.8rem; font-weight:800; color:#6d28d9;"><?php echo $ozet['BuAy'] ?? 0; ?></div>
+            <div style="font-size:0.8rem; color:#888; font-weight:600;">Bu Ay</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÇÖZÜM ORANI -->
+      <div class="card" style="border-top:4px solid #10b981; text-align:center;">
+        <h3 style="margin-top:0; color:#10b981; font-size:0.95rem;">✅ Sistem Çözüm Oranı</h3>
+        <?php
+          $toplam = $ozet['ToplamBasvuru'] ?? 0;
+          $cozulen = $ozet['Cozuldu'] ?? 0;
+          $cozumOrani = $toplam > 0 ? round(($cozulen / $toplam) * 100, 1) : 0;
+        ?>
+        <div style="font-size:2.8rem; font-weight:800; color:#10b981; margin:10px 0;">%<?php echo $cozumOrani; ?></div>
+        <div style="background:#e9ecef; height:10px; border-radius:5px; overflow:hidden; margin-top:8px;">
+          <div style="background:#10b981; width:<?php echo $cozumOrani; ?>%; height:100%; border-radius:5px;"></div>
+        </div>
+        <div style="font-size:0.8rem; color:#aaa; margin-top:6px;"><?php echo $cozulen; ?> / <?php echo $toplam; ?> talep çözüldü</div>
+      </div>
+
+      <!-- KULLANICI DAĞILIMI -->
+      <div class="card" style="border-top:4px solid #f59e0b;">
+        <h3 style="margin-top:0; color:#f59e0b; font-size:0.95rem;">👥 Kullanıcı Dağılımı</h3>
+        <div style="margin-top:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #f5f5f5;">
+            <span style="font-size:0.88rem; color:#555;">🎓 Öğrenci</span>
+            <span style="font-weight:800; color:#1a3a6b;"><?php echo $kullanici['OgrenciSayisi'] ?? 0; ?></span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #f5f5f5;">
+            <span style="font-size:0.88rem; color:#555;">👤 Personel</span>
+            <span style="font-weight:800; color:#1a3a6b;"><?php echo $kullanici['PersonelSayisi'] ?? 0; ?></span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0;">
+            <span style="font-size:0.88rem; color:#555;">🔑 Admin</span>
+            <span style="font-weight:800; color:#1a3a6b;"><?php echo $kullanici['AdminSayisi'] ?? 0; ?></span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; margin-top:4px; background:#f8f9fa; border-radius:6px; padding:8px;">
+            <span style="font-size:0.88rem; font-weight:700; color:#1a3a6b;">Toplam Kullanıcı</span>
+            <span style="font-weight:800; color:#1a3a6b; font-size:1.1rem;"><?php echo $kullanici['ToplamKullanici'] ?? 0; ?></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BİRİM PERFORMANS TABLOSU & KATEGORİ YÜKÜ -->
+    <div style="display:grid; grid-template-columns:3fr 2fr; gap:20px; margin-bottom:25px;">
+      
+      <!-- BİRİM PERFORMANSI -->
+      <div class="card">
+        <h3 style="margin-top:0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">🏛️ Birim Bazlı Performans Analizi</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+          <thead>
+            <tr style="background:#f8f9fa;">
+              <th style="padding:8px 12px; text-align:left; border-bottom:2px solid #dee2e6;">Birim</th>
+              <th style="padding:8px 12px; text-align:center; border-bottom:2px solid #dee2e6;">Toplam</th>
+              <th style="padding:8px 12px; text-align:center; border-bottom:2px solid #dee2e6;">Çözülen</th>
+              <th style="padding:8px 12px; text-align:center; border-bottom:2px solid #dee2e6;">Bekleyen</th>
+              <th style="padding:8px 12px; text-align:left; border-bottom:2px solid #dee2e6;">Çözüm Oranı</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($data['birim_performansi'] as $bp): 
+              $bRenk = $bp['CozumOrani'] >= 70 ? '#10b981' : ($bp['CozumOrani'] >= 40 ? '#f59e0b' : '#ef4444');
+            ?>
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:10px 12px; font-weight:600; color:#333;"><?php echo htmlspecialchars($bp['BirimAdi']); ?></td>
+              <td style="padding:10px 12px; text-align:center;"><?php echo $bp['Toplam']; ?></td>
+              <td style="padding:10px 12px; text-align:center; color:#10b981; font-weight:700;"><?php echo $bp['Cozulen']; ?></td>
+              <td style="padding:10px 12px; text-align:center; color:#ef4444; font-weight:700;"><?php echo $bp['Bekleyen']; ?></td>
+              <td style="padding:10px 12px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="flex:1; background:#e9ecef; height:8px; border-radius:4px; overflow:hidden;">
+                    <div style="background:<?php echo $bRenk; ?>; width:<?php echo $bp['CozumOrani']; ?>%; height:100%;"></div>
+                  </div>
+                  <span style="font-weight:700; color:<?php echo $bRenk; ?>; min-width:40px; font-size:0.85rem;">%<?php echo $bp['CozumOrani']; ?></span>
+                </div>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- KATEGORİ YÜKÜ -->
+      <div class="card">
+        <h3 style="margin-top:0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">📊 Kategori Yük Analizi</h3>
+        <?php foreach($data['kategori_yuku'] as $ky): 
+          $oncelikRenk = $ky['Oncelik'] == 'Yüksek' ? '#ef4444' : ($ky['Oncelik'] == 'Orta' ? '#f59e0b' : '#6b7280');
+        ?>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <div>
+                <span style="font-size:0.85rem; font-weight:600; color:#333;"><?php echo htmlspecialchars($ky['KategoriAdi']); ?></span>
+                <span style="background:<?php echo $oncelikRenk; ?>; color:white; padding:1px 6px; border-radius:10px; font-size:0.7rem; font-weight:700; margin-left:5px;"><?php echo $ky['Oncelik']; ?></span>
+              </div>
+              <span style="font-size:0.82rem; color:#888;"><?php echo $ky['Toplam']; ?> talep</span>
+            </div>
+            <div style="display:flex; gap:4px; height:8px;">
+              <?php if($ky['Toplam'] > 0): ?>
+                <div style="flex:<?php echo $ky['Toplam'] - $ky['Bekleyen']; ?>; background:#10b981; border-radius:4px 0 0 4px;" title="Çözülen"></div>
+                <div style="flex:<?php echo $ky['Bekleyen']; ?>; background:#ef4444; border-radius:0 4px 4px 0;" title="Bekleyen"></div>
+              <?php else: ?>
+                <div style="flex:1; background:#e9ecef; border-radius:4px;"></div>
+              <?php endif; ?>
+            </div>
+          </div>
+        <?php endforeach; ?>
+        <div style="display:flex; gap:15px; margin-top:10px; font-size:0.78rem; color:#888;">
+          <span><span style="display:inline-block;width:10px;height:10px;background:#10b981;border-radius:2px;margin-right:4px;"></span>Çözülen</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#ef4444;border-radius:2px;margin-right:4px;"></span>Bekleyen</span>
+        </div>
       </div>
     </div>
 
@@ -155,7 +284,12 @@
         <tbody>
           <?php foreach($data['basvurular'] as $b): ?>
           <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding:12px; font-weight:bold;">#<?php echo $b['BasvuruID']; ?></td>
+            <td style="padding:12px; font-weight:bold;">
+                #<?php echo $b['BasvuruID']; ?>
+                <?php if(isset($b['OkunmamisSayisi']) && $b['OkunmamisSayisi'] > 0): ?>
+                    <span style="background:#ef4444; color:white; padding:2px 6px; border-radius:10px; font-size:0.75rem; font-weight:bold; margin-left:5px;">🔴 Yeni</span>
+                <?php endif; ?>
+            </td>
             <td style="padding:12px;"><?php echo $b['AdSoyad']; ?></td>
             <td style="padding:12px;"><?php echo htmlspecialchars(substr($b['Baslik'], 0, 40)); ?>...</td>
             <td style="padding:12px;"><?php echo $b['BirimAdi'] ?? '-'; ?></td>

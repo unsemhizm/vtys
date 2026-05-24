@@ -19,17 +19,38 @@ class BasvuruController extends Controller {
             $aciklama = trim($_POST['aciklama']);
             $kullanici_id = $_SESSION['kullanici_id'];
 
+            $basvuruModel = $this->model('BasvuruModel');
+
             if(empty($baslik) || empty($kategori_id) || empty($birim_id) || empty($aciklama)) {
-                $this->view('yeni_basvuru', ['mesaj' => 'Lütfen tüm alanları doldurun.', 'tur' => 'hata']);
+                $kategoriler = $basvuruModel->tumKategorileriGetir();
+                $birimler = $basvuruModel->tumBirimleriGetir();
+                $this->view('yeni_basvuru', [
+                    'kategoriler' => $kategoriler,
+                    'birimler'    => $birimler,
+                    'mesaj'       => 'Lütfen tüm alanları doldurun.',
+                    'tur'         => 'hata'
+                ]);
                 return;
             }
-
-            $basvuruModel = $this->model('BasvuruModel');
             
             if ($basvuruModel->basvuruEkle($kullanici_id, $kategori_id, $birim_id, $baslik, $aciklama)) {
-                $this->view('yeni_basvuru', ['mesaj' => 'Başvurunuz başarıyla oluşturuldu! Başvurularım sekmesinden takip edebilirsiniz.', 'tur' => 'basari']);
+                $kategoriler = $basvuruModel->tumKategorileriGetir();
+                $birimler = $basvuruModel->tumBirimleriGetir();
+                $this->view('yeni_basvuru', [
+                    'kategoriler' => $kategoriler,
+                    'birimler'    => $birimler,
+                    'mesaj'       => 'Başvurunuz başarıyla oluşturuldu! Başvurularım sekmesinden takip edebilirsiniz.',
+                    'tur'         => 'basari'
+                ]);
             } else {
-                $this->view('yeni_basvuru', ['mesaj' => 'Kayıt sırasında bir hata oluştu.', 'tur' => 'hata']);
+                $kategoriler = $basvuruModel->tumKategorileriGetir();
+                $birimler = $basvuruModel->tumBirimleriGetir();
+                $this->view('yeni_basvuru', [
+                    'kategoriler' => $kategoriler,
+                    'birimler'    => $birimler,
+                    'mesaj'       => 'Kayıt sırasında bir hata oluştu.',
+                    'tur'         => 'hata'
+                ]);
             }
         }
     }
@@ -48,11 +69,13 @@ class BasvuruController extends Controller {
         }
 
         $basvuru_id = $_GET['id'];
+        $kullanici_id = $_SESSION['kullanici_id'];
         $basvuruModel = $this->model('BasvuruModel');
         $yanitModel = $this->model('YanitModel');
 
-        // Başvuru bilgilerini çek (Önceki yazdığımız metodun tekli versiyonu gibi düşünebilirsin)
-        // Not: BasvuruModel'e tekli çekme metodu eklememiz gerekecek.
+        // Diğer kullanıcıların yazdığı mesajları okundu olarak işaretle
+        $yanitModel->mesajlariOkunduYap($basvuru_id, $kullanici_id);
+
         $basvuru = $basvuruModel->basvuruDetayGetir($basvuru_id);
         $yanitlar = $yanitModel->yanitlariGetir($basvuru_id);
 

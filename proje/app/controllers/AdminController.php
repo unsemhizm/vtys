@@ -18,17 +18,23 @@ class AdminController extends Controller {
         $kullaniciModel = $this->model('KullaniciModel');
 
         $data = [
-            'toplam_bilet'    => $basvuruModel->toplamBiletSayisi(),
-            'cozulen_bilet'   => $basvuruModel->cozulenBiletSayisi(),
-            'acik_bilet'      => $basvuruModel->durumSayisiGetir(1),
-            'incelenen_bilet' => $basvuruModel->durumSayisiGetir(2),
-            'red_bilet'       => $basvuruModel->durumSayisiGetir(4),
-            'son_aktiviteler' => $basvuruModel->sonAktiviteleriGetir(),
-            'istatistikler'   => $basvuruModel->getIstatistikler(),
-            'birim_analizi'   => $basvuruModel->getBirimAnalizi(),
-            'aylik_trend'     => $basvuruModel->aylikBasvuruTrendi(),
-            'kullanicilar'    => $kullaniciModel->tumKullanicilariGetir(),
-            'basvurular'      => $basvuruModel->tumBasvurulariGetir()
+            'toplam_bilet'      => $basvuruModel->toplamBiletSayisi(),
+            'cozulen_bilet'     => $basvuruModel->cozulenBiletSayisi(),
+            'acik_bilet'        => $basvuruModel->durumSayisiGetir(1),
+            'incelenen_bilet'   => $basvuruModel->durumSayisiGetir(2),
+            'red_bilet'         => $basvuruModel->durumSayisiGetir(4),
+            'son_aktiviteler'   => $basvuruModel->sonAktiviteleriGetir(),
+            'istatistikler'     => $basvuruModel->getIstatistikler(),
+            'birim_analizi'     => $basvuruModel->getBirimAnalizi(),
+            'aylik_trend'       => $basvuruModel->aylikBasvuruTrendi(),
+            'kullanicilar'      => $kullaniciModel->tumKullanicilariGetir(),
+            'basvurular'        => $basvuruModel->tumBasvurulariGetir($_SESSION['kullanici_id']),
+            // Yeni gelişmiş istatistikler
+            'genel_ozet'        => $basvuruModel->adminGenelOzet(),
+            'birim_performansi' => $basvuruModel->adminBirimPerformansi(),
+            'kategori_yuku'     => $basvuruModel->adminKategoriYuku(),
+            'aylik_trend_detay' => $basvuruModel->adminAylikTrend(),
+            'kullanici_ozeti'   => $basvuruModel->adminKullaniciOzeti(),
         ];
 
         $this->view('AdminPanel', $data);

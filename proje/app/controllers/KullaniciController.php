@@ -22,10 +22,12 @@ class KullaniciController extends Controller {
         $basvuruModel = $this->model('BasvuruModel');
         $id = $_SESSION['kullanici_id'];
         
-        // Ana sayfayı dolduracak verileri çekiyoruz
         $data = [
-            'istatistik'  => $basvuruModel->ogrenciIstatistikleri($id),
-            'son_basvuru' => $basvuruModel->ogrenciSonBasvuru($id)
+            'istatistik'         => $basvuruModel->ogrenciIstatistikleri($id),
+            'detayli_istatistik' => $basvuruModel->ogrenciDetayliIstatistik($id),
+            'kategori_dagilimi'  => $basvuruModel->ogrenciKategoriDagilimi($id),
+            'son_talepler'       => $basvuruModel->ogrenciSonTalepler($id),
+            'son_basvuru'        => $basvuruModel->ogrenciSonBasvuru($id),
         ];
         
         $this->view('ogrenci_anasayfa', $data);
@@ -38,9 +40,14 @@ class KullaniciController extends Controller {
         }
         $birim_id = $_SESSION['birim_id']; 
         $basvuruModel = $this->model('BasvuruModel');
-        $basvurular = $basvuruModel->birimBasvurulariniGetir($birim_id);
 
-        $this->view('personel_paneli', ['basvurular' => $basvurular]);
+        $data = [
+            'basvurular'       => $basvuruModel->birimBasvurulariniGetir($birim_id, $_SESSION['kullanici_id']),
+            'istatistikler'    => $basvuruModel->personelIstatistikleri($birim_id),
+            'kategori_dagilimi'=> $basvuruModel->personelKategoriDagilimi($birim_id),
+        ];
+
+        $this->view('personel_paneli', $data);
     }
 
     public function basvurularim() {

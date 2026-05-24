@@ -8,13 +8,24 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/index.css" />
   <style>
-    .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-top: 20px; }
-    .dash-card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .stat-row { display: flex; gap: 15px; margin-top: 15px; }
-    .stat-box { flex: 1; padding: 15px; border-radius: 8px; text-align: center; border-bottom: 4px solid #ddd; background: #f8f9fa; }
-    .stat-box h4 { margin: 0; color: #666; font-size: 0.9rem; }
-    .stat-box p { margin: 5px 0 0 0; font-size: 1.5rem; font-weight: 800; color: #1a3a6b; }
-    .last-ticket { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #1a3a6b; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
+    .stat-card { background:#fff; border-radius:12px; padding:20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:4px solid #ddd; }
+    .stat-card .num { font-size:2rem; font-weight:800; margin:8px 0 4px; }
+    .stat-card .label { font-size:0.82rem; color:#888; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+    .section-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:20px; }
+    .section-card h3 { margin:0 0 16px; color:#1a3a6b; font-size:1rem; border-bottom:2px solid #f0f4f8; padding-bottom:10px; }
+    .ticket-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f0f4f8; }
+    .ticket-row:last-child { border-bottom:none; }
+    .ticket-row .t-title { font-weight:600; color:#333; font-size:0.9rem; }
+    .ticket-row .t-date { font-size:0.8rem; color:#aaa; margin-top:3px; }
+    .badge-sm { padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:700; color:white; white-space:nowrap; }
+    .progress-bar-wrap { margin-bottom:12px; }
+    .progress-bar-wrap .pb-label { display:flex; justify-content:space-between; font-size:0.83rem; margin-bottom:4px; color:#555; font-weight:600; }
+    .progress-bar-bg { background:#f0f4f8; border-radius:6px; height:10px; overflow:hidden; }
+    .progress-bar-fill { height:100%; border-radius:6px; background:#1a3a6b; transition:width 0.6s ease; }
+    .cta-btn { display:block; background:linear-gradient(135deg,#10b981,#059669); color:white; text-align:center; padding:18px; border-radius:12px; text-decoration:none; font-weight:800; font-size:1rem; box-shadow:0 4px 15px rgba(16,185,129,0.3); transition:transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(16,185,129,0.4); }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   </style>
 </head>
 <body>
@@ -33,7 +44,7 @@
         <div class="dropdown-content">
           <a href="index.php?controller=kullanici&action=profil">👤 Profilim</a>
           <a href="index.php?controller=kullanici&action=basvurularim">📋 Başvurularım</a>
-          <a href="index.php?controller=auth&action=logout" style="border-top: 1px solid var(--border); color: #dc3545;">🚪 Çıkış Yap</a>
+          <a href="index.php?controller=auth&action=logout" style="border-top:1px solid var(--border);color:#dc3545;">🚪 Çıkış Yap</a>
         </div>
       </div>
     </div>
@@ -55,73 +66,103 @@
   </aside>
 
   <div class="content">
-    <div class="header-content" style="margin-bottom: 10px;">
+    <div class="header-content" style="margin-bottom:20px;">
       <h1>Hoş Geldin, <?php echo explode(' ', $_SESSION['ad_soyad'])[0]; ?> 👋</h1>
-      <p>Kampüs Çözüm Merkezi'ne hoş geldin. Buradan taleplerini yönetebilir ve durumlarını takip edebilirsin.</p>
+      <p>Aşağıda tüm destek taleplerinizin özeti ve istatistikleri yer almaktadır.</p>
     </div>
 
-    <div class="dashboard-grid">
-        
-        <div style="display:flex; flex-direction:column; gap:20px;">
-            <div class="dash-card" style="text-align:center;">
-                <div style="width:70px; height:70px; background:#1a3a6b; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:bold; margin:0 auto 15px auto;">
-                    <?php echo mb_substr($_SESSION['ad_soyad'], 0, 1); ?>
-                </div>
-                <h3 style="margin:0; color:#333;"><?php echo $_SESSION['ad_soyad']; ?></h3>
-                <p style="color:#666; font-size:0.9rem; margin-top:5px;">Öğrenci Hesabı</p>
-                <a href="index.php?controller=kullanici&action=profil" style="display:inline-block; margin-top:10px; background:#f0f0f0; color:#333; padding:8px 15px; border-radius:20px; text-decoration:none; font-size:0.85rem; font-weight:bold;">Profili Düzenle</a>
-            </div>
+    <?php $ist = $data['detayli_istatistik'] ?? []; ?>
 
-            <a href="index.php?controller=kullanici&action=yeniBasvuru" style="background:#10b981; color:white; text-align:center; padding:20px; border-radius:12px; text-decoration:none; font-weight:bold; font-size:1.1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition:transform 0.2s;">
-                + YENİ DESTEK TALEBİ AÇ
-            </a>
-        </div>
-
-        <div style="display:flex; flex-direction:column; gap:20px;">
-            <div class="dash-card">
-                <h3 style="margin-top:0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">Taleplerimin Özeti</h3>
-                <div class="stat-row">
-                    <div class="stat-box" style="border-color:#1a3a6b;">
-                        <h4>Toplam Talep</h4>
-                        <p><?php echo $data['istatistik']['Toplam'] ?? 0; ?></p>
-                    </div>
-                    <div class="stat-box" style="border-color:#f59e0b;">
-                        <h4>Devam Eden</h4>
-                        <p style="color:#f59e0b;"><?php echo $data['istatistik']['DevamEden'] ?? 0; ?></p>
-                    </div>
-                    <div class="stat-box" style="border-color:#10b981;">
-                        <h4>Çözülen</h4>
-                        <p style="color:#10b981;"><?php echo $data['istatistik']['Cozuldu'] ?? 0; ?></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dash-card">
-                <h3 style="margin-top:0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">Son Aktivitem</h3>
-                <?php if(!empty($data['son_basvuru'])): ?>
-                    <div class="last-ticket" style="border-left-color: <?php echo $data['son_basvuru']['RenkKodu']; ?>;">
-                        <div>
-                            <strong style="color:#333;">#<?php echo $data['son_basvuru']['BasvuruID']; ?> - <?php echo htmlspecialchars($data['son_basvuru']['Baslik']); ?></strong>
-                            <div style="font-size:0.85rem; color:#666; margin-top:5px;">Oluşturulma: <?php echo date('d.m.Y', strtotime($data['son_basvuru']['OlusturulmaTarihi'])); ?></div>
-                        </div>
-                        <div style="text-align:right;">
-                            <span style="background:<?php echo $data['son_basvuru']['RenkKodu']; ?>; color:white; padding:5px 12px; border-radius:20px; font-size:0.85rem; font-weight:bold;">
-                                <?php echo $data['son_basvuru']['DurumAdi']; ?>
-                            </span>
-                            <br>
-                            <a href="index.php?controller=basvuru&action=detay&id=<?php echo $data['son_basvuru']['BasvuruID']; ?>" style="display:inline-block; margin-top:8px; font-size:0.85rem; color:#1a3a6b; font-weight:bold; text-decoration:none;">İncele ➔</a>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <p style="color:#666; font-style:italic;">Henüz oluşturulmuş bir destek talebiniz bulunmuyor.</p>
-                <?php endif; ?>
-                <div style="text-align:right; margin-top:15px;">
-                    <a href="index.php?controller=kullanici&action=basvurularim" style="color:#1a3a6b; font-weight:bold; text-decoration:none;">Tüm Taleplerimi Gör</a>
-                </div>
-            </div>
-        </div>
-
+    <!-- İSTATİSTİK KARTLARI -->
+    <div class="stats-row">
+      <div class="stat-card" style="border-color:#1a3a6b;">
+        <div class="label">Toplam Talep</div>
+        <div class="num" style="color:#1a3a6b;"><?php echo $ist['Toplam'] ?? 0; ?></div>
+      </div>
+      <div class="stat-card" style="border-color:#f59e0b;">
+        <div class="label">Açık</div>
+        <div class="num" style="color:#f59e0b;"><?php echo $ist['Acik'] ?? 0; ?></div>
+      </div>
+      <div class="stat-card" style="border-color:#3b82f6;">
+        <div class="label">İnceleniyor</div>
+        <div class="num" style="color:#3b82f6;"><?php echo $ist['Inceleniyor'] ?? 0; ?></div>
+      </div>
+      <div class="stat-card" style="border-color:#10b981;">
+        <div class="label">Çözülen</div>
+        <div class="num" style="color:#10b981;"><?php echo $ist['Cozuldu'] ?? 0; ?></div>
+      </div>
     </div>
+
+    <div class="two-col">
+      <!-- SON TALEPLERİM -->
+      <div class="section-card">
+        <h3>📋 Son Taleplerim</h3>
+        <?php if(!empty($data['son_talepler'])): ?>
+          <?php foreach($data['son_talepler'] as $t): ?>
+            <div class="ticket-row">
+              <div>
+                <div class="t-title"><?php echo htmlspecialchars(mb_substr($t['Baslik'],0,40)); ?>...</div>
+                <div class="t-date"><?php echo date('d.m.Y', strtotime($t['OlusturulmaTarihi'])); ?></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="badge-sm" style="background:<?php echo $t['RenkKodu']; ?>;"><?php echo $t['DurumAdi']; ?></span>
+                <a href="index.php?controller=basvuru&action=detay&id=<?php echo $t['BasvuruID']; ?>" style="font-size:0.8rem;color:#1a3a6b;font-weight:bold;text-decoration:none;">İncele →</a>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <p style="color:#aaa;font-style:italic;text-align:center;padding:20px 0;">Henüz talebiniz bulunmuyor.</p>
+        <?php endif; ?>
+        <div style="text-align:right;margin-top:12px;">
+          <a href="index.php?controller=kullanici&action=basvurularim" style="color:#1a3a6b;font-weight:bold;font-size:0.88rem;text-decoration:none;">Tümünü Gör →</a>
+        </div>
+      </div>
+
+      <!-- KATEGORİ DAĞILIMI -->
+      <div class="section-card">
+        <h3>📊 Başvurduğum Kategoriler</h3>
+        <?php 
+          $toplam = $ist['Toplam'] ?? 0;
+          if(!empty($data['kategori_dagilimi']) && $toplam > 0):
+            foreach($data['kategori_dagilimi'] as $kat):
+              $yuzde = round(($kat['Adet'] / $toplam) * 100, 1);
+        ?>
+          <div class="progress-bar-wrap">
+            <div class="pb-label">
+              <span><?php echo htmlspecialchars($kat['KategoriAdi']); ?></span>
+              <span><?php echo $kat['Adet']; ?> talep (%<?php echo $yuzde; ?>)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width:<?php echo $yuzde; ?>%;"></div>
+            </div>
+          </div>
+        <?php endforeach; else: ?>
+          <p style="color:#aaa;font-style:italic;text-align:center;padding:20px 0;">Henüz kategori verisi yok.</p>
+        <?php endif; ?>
+      </div>
+    </div>
+
+    <!-- ÇÖZÜM ORANI & YENİ TALEP -->
+    <div class="two-col">
+      <div class="section-card" style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:0.85rem;color:#888;font-weight:600;text-transform:uppercase;">Çözüm Oranınız</div>
+          <?php 
+            $oran = ($ist['Toplam'] ?? 0) > 0 ? round(($ist['Cozuldu'] / $ist['Toplam']) * 100, 1) : 0;
+          ?>
+          <div style="font-size:2.5rem;font-weight:800;color:#10b981;margin:8px 0;">%<?php echo $oran; ?></div>
+          <div style="font-size:0.83rem;color:#aaa;"><?php echo $ist['Cozuldu'] ?? 0; ?> / <?php echo $ist['Toplam'] ?? 0; ?> talep çözüldü</div>
+        </div>
+        <div style="font-size:3.5rem;">🏆</div>
+      </div>
+
+      <a href="index.php?controller=kullanici&action=yeniBasvuru" class="cta-btn">
+        <div style="font-size:2rem;margin-bottom:8px;">✏️</div>
+        YENİ DESTEK TALEBİ AÇ
+        <div style="font-size:0.82rem;font-weight:400;margin-top:5px;opacity:0.85;">Sorunlarınızı ilgili birime doğrudan iletin</div>
+      </a>
+    </div>
+
   </div>
 </div>
 </body>
