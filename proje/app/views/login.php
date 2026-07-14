@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="header-right" style="display: flex; gap: 10px;">
-      <button id="secretAdminBtn" class="btn-primary" style="padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: #dc3545;" onclick="openAdminModal()">Admin Girişi</button>
+      <button id="secretAdminBtn" class="btn-primary" style="display: none; padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: #dc3545;" onclick="openAdminModal()">Admin Girişi</button>
       <button class="btn-primary" style="padding: 0.5rem 1.4rem; font-size: 0.85rem; border-radius: 20px; background: var(--accent);" onclick="openLoginModal()">Giriş Yap</button>
     </div>
   </div>
@@ -306,7 +306,38 @@
     errorBox.style.display = 'block';
   }
 
+  // Secret Key Combination (Easter Egg)
+  let secretCode = "admin";
+  let inputSequence = "";
+  let adminBtnTimer = null;
 
+  document.addEventListener('keydown', function(e) {
+    // Ignore if typing in input fields
+    if (e.target.tagName.toLowerCase() === 'input' || e.target.tagName.toLowerCase() === 'textarea') return;
+
+    inputSequence += e.key.toLowerCase();
+    
+    // Keep sequence length same as secret code
+    if (inputSequence.length > secretCode.length) {
+      inputSequence = inputSequence.substring(1);
+    }
+
+    if (inputSequence === secretCode) {
+      const adminBtn = document.getElementById('secretAdminBtn');
+      adminBtn.style.display = 'block'; // Show button
+      
+      // Clear sequence to prevent multiple triggers
+      inputSequence = "";
+
+      // Clear existing timer if triggered again
+      if (adminBtnTimer) clearTimeout(adminBtnTimer);
+
+      // Hide after 10 seconds
+      adminBtnTimer = setTimeout(() => {
+        adminBtn.style.display = 'none';
+      }, 10000);
+    }
+  });
 </script>
 <?php if(isset($data['hata']) && !empty($data['hata'])): ?>
     <script>
